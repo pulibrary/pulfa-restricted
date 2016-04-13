@@ -24,11 +24,9 @@
    <!-- globals ============================================================ -->
    <xsl:template match="ead:head"/>
    <xsl:template match="ead:revisiondesc"/>
-   <xsl:param name="base-uri" as="xs:string"/>
-   <xsl:param name="callno" as="xs:string" select="blank"/>
-   <xsl:param name="component-id" as="xs:string" select="blank"/>
+
    <xsl:variable name="aeon-url" select="'https://libweb10.princeton.edu/aeon/Aeon.dll'" />
-   <xsl:variable name="collections-base-uri" select="concat($base-uri, '/collections')" as="xs:string"/>
+   <xsl:variable name="collections-base-uri" select="concat($xslt.base-uri, '/collections')" as="xs:string"/>
    <xsl:variable name="repo">
       <xsl:choose>
          <xsl:when test="//ead:archdesc/ead:did/ead:repository[@id='univarchives']">
@@ -98,7 +96,7 @@
    </xsl:variable>
    <xsl:variable name="ark" select="/ead:ead/ead:eadheader/ead:eadid/@url"/>
    <xsl:variable name="id" select="/ead:ead/ead:eadheader/ead:eadid/@urn"/>
-   <!--<xsl:variable name="callno" select="string-join(/ead:ead/ead:archdesc/ead:did/ead:unitid, '; ')"/>-->
+  
    <xsl:variable name="VOYAGER_QUERY_BASE">
       <xsl:value-of select="'http://catalog.princeton.edu/cgi-bin/Pwebrecon.cgi?DB=local'"/>
    </xsl:variable>
@@ -5550,6 +5548,23 @@ If only unitdate or only unittitle, display as is.  -->
       <!--            <xsl:with-param name="id" select="concat('odd', $position cast as xs:string)"/>
         </xsl:apply-templates>-->
    </xsl:template>
+    
+    
+    <xsl:template match="ead:dao|ead:did/ead:dao">
+        <a>
+            <xsl:attribute name="href">
+                <xsl:value-of select="@xlink:href"/>
+            </xsl:attribute>
+            <xsl:attribute name="class">
+                <xsl:text>btn small</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="target">
+                <xsl:text>_blank</xsl:text>
+            </xsl:attribute>
+            View PDF
+        </a>
+    </xsl:template>
+    
    <xsl:template match="ead:accessrestrict[not(ancestor::ead:dsc)]">
       <xsl:choose>
          <xsl:when test="preceding-sibling::ead:accessrestrict">
