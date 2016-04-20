@@ -237,7 +237,7 @@
             //ead:archdesc/ead:dsc/(ead:c01[@level='subgrp']|ead:c[@level='subgrp'])">
             <xsl:variable name="sansUnitdate" select="replace(ead:did/ead:unittitle, '(.*),\s*\d\d\d\d.*', '$1', 'm')"/>
             <li>
-               <a href="{$xslt.base-uri}/{$xslt.record-id}.html?view=onepage#{@id}">
+               <a href="{$xslt.base-uri}?view=onepage#{@id}">
                   <xsl:value-of select="$sansUnitdate"/>
                </a>
             </li>
