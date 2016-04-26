@@ -5366,7 +5366,7 @@ If only unitdate or only unittitle, display as is.  -->
                               </h5>
                            </xsl:when>
                            <xsl:otherwise>
-                              <p>
+                              <p class="{$class}">
                                  <xsl:if test="@id">
                                     <xsl:attribute name="id" select="@id"/>
                                  </xsl:if>
