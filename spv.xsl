@@ -152,7 +152,8 @@
                   </div>
                </div>
             </div>
-            
+            <script language="Javascript" type="text/javascript" src="js/jquery-1.12.3.min.js"><!-- # --></script>
+            <script language="Javascript" type="text/javascript" src="js/local.js"><!-- # --></script>
          </body>
          
       </html>
@@ -173,14 +174,14 @@
          </li>
          <xsl:if test="//ead:archdesc/ead:did">
             <li>
-               <a href="{$xslt.base-uri}/{$xslt.record-id}.html?view=onepage#collectionDid">
+               <a href="{$xslt.base-uri}/index.html#collectionDid">
                   <xsl:text>Summary Information</xsl:text>
                </a>
             </li>
          </xsl:if>
          <xsl:if test="//ead:archdesc/ead:bioghist[p]">
             <li>
-               <a href="{$xslt.base-uri}/{$xslt.record-id}.html?view=onepage#bioghist">
+               <a href="{$xslt.base-uri}/index.html#bioghist">
                   <xsl:choose>
                      <xsl:when test="../ead:did/ead:origination/*[@encodinganalog='100']">
                         <xsl:text>Biography</xsl:text>
@@ -201,7 +202,7 @@
          </xsl:if>
          <xsl:if test="//ead:archdesc/ead:descgrp[@id='dacs3']/ead:scopecontent">
             <li>
-               <a href="{$xslt.base-uri}/{$xslt.record-id}.html?view=onepage#scopecontent">
+               <a href="{$xslt.base-uri}/index.html#scopecontent">
                   <!--<xsl:value-of
                             select="//ead:archdesc/ead:descgrp[@id='dacs3']/ead:scopecontent/ead:head"
                         />-->
@@ -211,23 +212,23 @@
          </xsl:if>
          <xsl:if test="//ead:archdesc/ead:descgrp[@id='dacs3']/ead:arrangement">
             <li>
-               <a href="{$xslt.base-uri}/{$xslt.record-id}.html?view=onepage#arrangement">Arrangement</a>
+               <a href="{$xslt.base-uri}/index.html#arrangement">Arrangement</a>
             </li>
          </xsl:if>
          <xsl:if test="//ead:archdesc/ead:descgrp[@id='dacs4']">
             <li>
-               <a href="{$xslt.base-uri}/{$xslt.record-id}.html?view=onepage#accessrestrict">Information for Users</a>
+               <a href="{$xslt.base-uri}/index.html#accessrestrict">Information for Users</a>
             </li>
          </xsl:if>
          <xsl:if test="//ead:archdesc/ead:controlaccess">
             <li>
-               <a href="{$xslt.base-uri}/{$xslt.record-id}.html?view=onepage#controlaccess">Subject Headings</a>
+               <a href="{$xslt.base-uri}/index.html#controlaccess">Subject Headings</a>
             </li>
          </xsl:if>
 
          <xsl:if test="//ead:archdesc/ead:dsc">
             <li>
-               <a href="{$xslt.base-uri}/{$xslt.record-id}.html?view=onepage#dsc">Contents List</a>
+               <a href="{$xslt.base-uri}/index.html#dsc">Contents List</a>
             </li>
          </xsl:if>
 
@@ -237,7 +238,7 @@
             //ead:archdesc/ead:dsc/(ead:c01[@level='subgrp']|ead:c[@level='subgrp'])">
             <xsl:variable name="sansUnitdate" select="replace(ead:did/ead:unittitle, '(.*),\s*\d\d\d\d.*', '$1', 'm')"/>
             <li>
-               <a href="{$xslt.base-uri}?view=onepage#{@id}">
+               <a href="{$xslt.base-uri}/index.html#{@id}">
                   <xsl:value-of select="$sansUnitdate"/>
                </a>
             </li>
@@ -4792,7 +4793,7 @@
                      <li>
                         <a>
                            <xsl:attribute name="href">
-                              <xsl:value-of select="concat($xslt.base-uri, '/collections/', $xslt.record-id, '?view=onepage#', generate-id(.))"/>
+                              <xsl:value-of select="concat($xslt.base-uri, '/collections/', $xslt.record-id, '#', generate-id(.))"/>
                            </xsl:attribute>
                            <xsl:if test="self::ead:*/@level='subseries'">
                               <xsl:attribute name="style">margin-left:2em;</xsl:attribute>
@@ -5401,9 +5402,9 @@ If only unitdate or only unittitle, display as is.  -->
                         <!-- Added originalsloc, RH: langmaterial, odd, phystech, otherfindaid, custodhist, acqinfo, appraisal, accruals, relatedmaterial,
                                 bibliography, separatedmaterial-->
                         <!-- any others? -->
-                        <p>
-                           <a href="{$xslt.base-uri}/{$xslt.record-id}.html?view=onepage#dsc">Back to Top of Contents List</a>
-                        </p>
+                        <!--<p>
+                           <a href="{$xslt.base-uri}/index.html#dsc">Back to Top of Contents List</a>
+                        </p>-->
                      </td>
                      <xsl:if test="(ead:did/ead:container | ead:did/ead:unitid[@type='itemnumber'])">
         
