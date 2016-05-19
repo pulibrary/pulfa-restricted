@@ -164,14 +164,14 @@
    <xsl:template name="menu">
       <ul id="menu">
          <li class="menuRepoLink">
-            <a href="{$repohref}">
+            <!--<a href="{$repohref}">-->
                <xsl:value-of select="$repo"/>
-            </a>
+            <!--</a>-->
          </li>
 
-         <li>
+         <!--<li>
             <a href="{$repocontact}">Contact</a>
-         </li>
+         </li>-->
          <xsl:if test="//ead:archdesc/ead:did">
             <li>
                <a href="{$xslt.base-uri}/index.html#collectionDid">
@@ -220,11 +220,11 @@
                <a href="{$xslt.base-uri}/index.html#accessrestrict">Information for Users</a>
             </li>
          </xsl:if>
-         <xsl:if test="//ead:archdesc/ead:controlaccess">
+         <!--<xsl:if test="//ead:archdesc/ead:controlaccess">
             <li>
                <a href="{$xslt.base-uri}/index.html#controlaccess">Subject Headings</a>
             </li>
-         </xsl:if>
+         </xsl:if>-->
 
          <xsl:if test="//ead:archdesc/ead:dsc">
             <li>
@@ -287,7 +287,7 @@
       <xsl:apply-templates select="ead:descgrp[@id='dacs5']"/>
       <xsl:apply-templates select="ead:descgrp[@id='dacs6']"/>
       <xsl:apply-templates select="ead:descgrp[@id='dacs7']"/>
-      <xsl:apply-templates select="ead:controlaccess"/>
+      <!--<xsl:apply-templates select="ead:controlaccess"/>-->
       <xsl:apply-templates select="ead:dsc[@type='combined']"/>
       <xsl:apply-templates select="ead:index"/>
       <xsl:apply-templates select="ead:odd"/>
