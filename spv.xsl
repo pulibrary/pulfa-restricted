@@ -125,7 +125,7 @@
                <xsl:with-param name="base-uri" select="$xslt.base-uri"></xsl:with-param>
             </xsl:call-template>
             <xsl:call-template name="standard-css"/>
-            <link rel="stylesheet" type="text/css" href="classic.css" media="all"/>
+            <link rel="stylesheet" type="text/css" href="css/classic.css" media="all"/>
             <link rel="canonical" href="{$xslt.base-uri}/{$xslt.record-id}.html"/>
          </head>
          <body>
@@ -164,14 +164,14 @@
    <xsl:template name="menu">
       <ul id="menu">
          <li class="menuRepoLink">
-            <a href="{$repohref}">
+            <!--<a href="{$repohref}">-->
                <xsl:value-of select="$repo"/>
-            </a>
+            <!--</a>-->
          </li>
 
-         <li>
+         <!--<li>
             <a href="{$repocontact}">Contact</a>
-         </li>
+         </li>-->
          <xsl:if test="//ead:archdesc/ead:did">
             <li>
                <a href="{$xslt.base-uri}/index.html#collectionDid">
@@ -220,11 +220,11 @@
                <a href="{$xslt.base-uri}/index.html#accessrestrict">Information for Users</a>
             </li>
          </xsl:if>
-         <xsl:if test="//ead:archdesc/ead:controlaccess">
+         <!--<xsl:if test="//ead:archdesc/ead:controlaccess">
             <li>
                <a href="{$xslt.base-uri}/index.html#controlaccess">Subject Headings</a>
             </li>
-         </xsl:if>
+         </xsl:if>-->
 
          <xsl:if test="//ead:archdesc/ead:dsc">
             <li>
@@ -287,7 +287,7 @@
       <xsl:apply-templates select="ead:descgrp[@id='dacs5']"/>
       <xsl:apply-templates select="ead:descgrp[@id='dacs6']"/>
       <xsl:apply-templates select="ead:descgrp[@id='dacs7']"/>
-      <xsl:apply-templates select="ead:controlaccess"/>
+      <!--<xsl:apply-templates select="ead:controlaccess"/>-->
       <xsl:apply-templates select="ead:dsc[@type='combined']"/>
       <xsl:apply-templates select="ead:index"/>
       <xsl:apply-templates select="ead:odd"/>
@@ -5366,7 +5366,7 @@ If only unitdate or only unittitle, display as is.  -->
                               </h5>
                            </xsl:when>
                            <xsl:otherwise>
-                              <p class="{$class}">
+                              <p class="bold {$class}">
                                  <xsl:if test="@id">
                                     <xsl:attribute name="id" select="@id"/>
                                  </xsl:if>
@@ -5382,6 +5382,7 @@ If only unitdate or only unittitle, display as is.  -->
                         <xsl:apply-templates select="ead:scopecontent"/>
                         <xsl:apply-templates select="ead:arrangement"/>
                         <xsl:apply-templates select="ead:controlaccess"/>
+                        <xsl:apply-templates select="ead:dao|ead:did/ead:dao"/>
                         <xsl:apply-templates select="ead:accessrestrict"/>
                         <xsl:apply-templates select="ead:userestrict"/>
                         <xsl:apply-templates select="ead:altformavail"/>
@@ -5398,7 +5399,7 @@ If only unitdate or only unittitle, display as is.  -->
                         <xsl:apply-templates select="ead:relatedmaterial"/>
                         <xsl:apply-templates select="ead:bibliography"/>
                         <xsl:apply-templates select="ead:separatedmaterial"/>
-                        <xsl:apply-templates select="ead:dao|ead:did/ead:dao"/>
+                        
                         <!-- Added originalsloc, RH: langmaterial, odd, phystech, otherfindaid, custodhist, acqinfo, appraisal, accruals, relatedmaterial,
                                 bibliography, separatedmaterial-->
                         <!-- any others? -->
@@ -7903,14 +7904,16 @@ If only unitdate or only unittitle, display as is.  -->
       <xsl:apply-templates select="ead:p[position()>1]"/>
    </xsl:template>
    <xsl:template match="ead:accessrestrict[ancestor::ead:dsc]">
-      <p>
-         <span class="bold">
-            <xsl:text>Access: </xsl:text>
-         </span>
+      <p class="access-label">
+         <a href="#">
+            <xsl:text>Access Note </xsl:text><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+         </a>
       </p>
+      <div class="access-note">
       <xsl:apply-templates select="ead:p[position()=1]"/>
 
       <xsl:apply-templates select="ead:p[position()>1]"/>
+      </div>
    </xsl:template>
    <xsl:template match="ead:userestrict[ancestor::ead:dsc]">
       <p>
