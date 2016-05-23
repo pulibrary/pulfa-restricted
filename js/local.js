@@ -20,4 +20,10 @@ $(function () {
     }); 
     
     
+    $( ".access-label" ).click(function(e) {
+      e.preventDefault();
+      $( this ).next().toggle( "slow" );
+    });
+    
+    
 });

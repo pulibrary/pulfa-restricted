@@ -10,7 +10,7 @@
    </xsl:template>
 
    <xsl:template name="standard-css" as="element()*">
-      <link rel="stylesheet" type="text/css" href="pulfa.css" media="all"/>
+      <link rel="stylesheet" type="text/css" href="css/pulfa.css" media="all"/>
    </xsl:template>
 
    <xsl:template name="standard-alt" as="element()*">

@@ -10,7 +10,6 @@ div#header h1 {
 
 div#header h1 a {
    color: #fff;
-   background-color: inherit;
    font: inherit;
 
 }
@@ -39,7 +38,6 @@ h4 {
 
 a {
    color: #f58025;
-   background-color: inherit;
    text-decoration: none;
 }
 /* Header navigation */
@@ -56,7 +54,7 @@ ul.places {
 ul.places li {
    display: inline;
    padding: 0 1em;
-   
+
 }
 
 ul.places li+li {
@@ -81,7 +79,7 @@ form.headerSearchForm input.button {
 ul.browse {
   font-weight: bold;
   margin-bottom: 1em;
-  
+
 }
 
 /*ul.browse li a{
@@ -197,7 +195,7 @@ ul#menu li option.selected {
 /* h1 and h2 inherited from site */
 
 h3 {
-   font-size: 140%;
+   /*font-size: 140%;*/
    color: #555;
    background-color: inherit;
    padding: 1em 0;
@@ -213,7 +211,7 @@ h3#callno {
 
 h4 {
    font-weight: bold;
-   font-size: larger;
+   /*font-size: larger;*/
    color: #000;
    background-color: inherit;
    padding: .5em 1em 0 0;
@@ -235,7 +233,7 @@ h5 {
    background-color: inherit;
    font-weight: bold;
    margin: .5em 0;
-   font-size: 100%;
+   /*font-size: 100%;*/
 }
 
 h6 {
@@ -243,7 +241,7 @@ h6 {
    background-color: inherit;
    font-weight: bold;
    margin: .5em 0 0 0;
-   font-size: 100%;
+   /*font-size: 100%;*/
 }
 /* The body of the ead */
 
@@ -411,7 +409,6 @@ li.arrangementSubseries {
 /* Links */
 a:link {
    color: #f58025;
-   background-color: inherit;
    font-weight: normal;
 }
 
@@ -433,7 +430,7 @@ a:hover {
 
 ul#menu a, p.print a {
    color: #f58025;
-   background-color: inherit;   
+   background-color: inherit;
 }
 
 /* the dsc... */
@@ -477,7 +474,7 @@ ol.contents h6 {
 table.c01 {
    width: 99%;
    padding: .25em .25em .25em 1%;
-   
+
 }
 
 table.c01 td.data {
@@ -691,7 +688,7 @@ a.back-to-top {
 	z-index: 999;
 	right: 20px;
 	bottom: 20px;
-	background: #000 url("up-arrow.png") no-repeat center 43%;
+	background: #000 url("../up-arrow.png") no-repeat center 43%;
 	-webkit-border-radius: 30px;
 	-moz-border-radius: 30px;
 	border-radius: 30px;
@@ -699,6 +696,15 @@ a.back-to-top {
 
 p.c03 {
     font-weight: bold;
+}
+
+ol.contents a.btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+ol.contents div.access-note {
+    display:none;
 }
 
 /*
