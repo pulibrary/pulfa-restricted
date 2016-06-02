@@ -108,6 +108,7 @@
         <descgrp id="dacs6"> 
         <relatedmaterial>
             <p>Other materials relating to Toni Morrison's work at Random House may be found in the <extref xmlns:xlin="http://www.w3.org/1999/xlink" xlin:href="http://www.columbia.edu/cu/lweb/archival/collections/ldpd_4079581/" xlin:type="simple">Random House records</extref> at Columbia University's Rare Book and Manuscript Library. </p>
+            <p>Original drafts of Toni Cade Bambara's writings and related materials may be found in the <extref xmlns:xlin="http://www.w3.org/1999/xlink" xlin:href="http://www.spelman.edu/about-us/archives" xlin:type="simple">Spelman College Archives</extref>.</p>
         </relatedmaterial>
         </descgrp>
         <descgrp id="dacs7">
@@ -1619,23 +1620,7 @@
                             </scopecontent>
                             
                         </c>
-                        <c level="item" id="C1491_c102">
-                            <did>
-                                <unittitle><emph render="italic">Beloved</emph> Master Page Proofs</unittitle>
-                                <container type="box">18</container>
-                                <container type="folder">5-6</container>
-                                <unitdate normal="1987/1987">1987</unitdate>
-                                <physdesc>
-                                    <extent type="computed">1 item</extent>
-                                </physdesc>
-                            <dao xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="pdf/c102.pdf"/></did>
-                            <accessrestrict type="closed">
-                                <p>Toni Morrison has required the Library to make surrogate copies of all of her manuscripts (including typescripts and proofs) and diaries (appointment books), including but not restricted to those damaged by fire in 1993. This is for conservation reasons, to prevent damage and deterioration by repeated use. Researchers are required to use digital surrogates in the reading room of the Department of Rare Books and Special Collections.</p>
-                            </accessrestrict>
-                            <scopecontent>
-                                <p>Pages i-vii, 1-277.</p>
-                            </scopecontent>
-                        </c> 
+                         
                         <c level="item" id="C1491_c103">
                             <did>
                                 <unittitle>
@@ -1652,6 +1637,23 @@
                             </accessrestrict>
                             <scopecontent>
                                 <p>Pages i- vii, 1 (formerly 3)-277.</p>
+                            </scopecontent>
+                        </c>
+                        <c level="item" id="C1491_c102">
+                            <did>
+                                <unittitle><emph render="italic">Beloved</emph> Master Page Proofs</unittitle>
+                                <container type="box">18</container>
+                                <container type="folder">5-6</container>
+                                <unitdate normal="1987/1987">1987</unitdate>
+                                <physdesc>
+                                    <extent type="computed">1 item</extent>
+                                </physdesc>
+                                <dao xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="pdf/c102.pdf"/></did>
+                            <accessrestrict type="closed">
+                                <p>Toni Morrison has required the Library to make surrogate copies of all of her manuscripts (including typescripts and proofs) and diaries (appointment books), including but not restricted to those damaged by fire in 1993. This is for conservation reasons, to prevent damage and deterioration by repeated use. Researchers are required to use digital surrogates in the reading room of the Department of Rare Books and Special Collections.</p>
+                            </accessrestrict>
+                            <scopecontent>
+                                <p>Pages i-vii, 1-277.</p>
                             </scopecontent>
                         </c>
                         <c level="item" id="C1491_c104">
@@ -16374,7 +16376,7 @@
                 <arrangement>
                     <p>This series is arranged alphabetically.</p>
                 </arrangement>
-                <scopecontent> <p>Consists primarily of personal correspondence sent to Morrison's home. Professional correspondence found Morrison's office working files and fan mail are not yet available.</p></scopecontent>
+                <scopecontent> <p>Consists primarily of personal correspondence from friends, family, and colleagues. Professional correspondence found in Morrison's office working files and fan mail are not yet available.</p></scopecontent>
                 <c level="file" id="C1491_c1262">
                     <did>
                         <unittitle>70th Birthday Cards</unittitle>
@@ -16667,12 +16669,22 @@
                 <c level="file" id="C1491_c1288">
                     <did>
                         <unittitle>Bambara, Toni Cade</unittitle>
-                        <container type="box">70</container>
-                        <container type="folder">1</container>
+                        
                         <container type="box">69</container>
                         <container type="folder">9</container>
                         <unitdate type="inclusive" normal="1977/1995">1977-1995</unitdate>
                     <physdesc>
+                            <extent type="computed">1 folder</extent>
+                        </physdesc>
+                    </did>
+                </c>
+                <c level="file" id="C1491_c1899">
+                    <did>
+                        <unittitle>Bambara, Toni Cade</unittitle>
+                        <container type="box">70</container>
+                        <container type="folder">1</container> 
+                        <unitdate type="inclusive" normal="1977/1995">1977-1995</unitdate>
+                        <physdesc>
                             <extent type="computed">1 folder</extent>
                         </physdesc>
                     </did>
@@ -16900,11 +16912,22 @@
                         </physdesc>
                     </did>
                 </c>
+                <c level="file" id="C1491_c1475">
+                    <did>
+                        <unittitle>Brodsky, Claudia</unittitle>
+                        <container type="box">71</container>
+                        <container type="folder">7</container>
+                        <unitdate type="inclusive" normal="1990/2015">1990-2015</unitdate>
+                        <physdesc>
+                            <extent type="computed">1 folder</extent>
+                        </physdesc>
+                    </did>
+                </c>
                 <c level="file" id="C1491_c1309">
                     <did>
                         <unittitle>Brombert, Beth and Victor</unittitle>
                         <container type="box">71</container>
-                        <container type="folder">7</container>
+                        <container type="folder">8</container>
                         <unitdate type="inclusive" normal="1989/2008">1989-2008</unitdate>
                     <physdesc>
                             <extent type="computed">1 folder</extent>
@@ -16915,7 +16938,7 @@
                     <did>
                         <unittitle>Brony, Elizabeth</unittitle>
                         <container type="box">71</container>
-                        <container type="folder">8</container>
+                        <container type="folder">9</container>
                         <unitdate type="inclusive" normal="1995/1997">1995-1997</unitdate>
                     <physdesc>
                             <extent type="computed">1 folder</extent>
@@ -16926,7 +16949,7 @@
                     <did>
                         <unittitle>Brooks, Cynthia</unittitle>
                         <container type="box">71</container>
-                        <container type="folder">9</container>
+                        <container type="folder">10</container>
                         <unitdate normal="1999">1999</unitdate>
                     <physdesc>
                             <extent type="computed">1 folder</extent>
@@ -16937,7 +16960,7 @@
                     <did>
                         <unittitle>Brooks, Georgia</unittitle>
                         <container type="box">71</container>
-                        <container type="folder">10</container>
+                        <container type="folder">11</container>
                         <unitdate type="inclusive" normal="1971/2011">1971-2011</unitdate>
                     <physdesc>
                             <extent type="computed">1 folder</extent>
@@ -16948,7 +16971,7 @@
                     <did>
                         <unittitle>Brooks, Gwendolyn</unittitle>
                         <container type="box">71</container>
-                        <container type="folder">11</container>
+                        <container type="folder">12</container>
                         <unitdate type="inclusive" normal="1993/1997">1993-1997</unitdate>
                     <physdesc>
                             <extent type="computed">1 folder</extent>
@@ -16958,12 +16981,22 @@
                 <c level="file" id="C1491_c1314">
                     <did>
                         <unittitle>Brooks, Lois Wofford</unittitle>
-                        <container type="box">72</container>
-                        <container type="folder">1</container>
+                        
                         <container type="box">71</container>
-                        <container type="folder">12-13</container>
+                        <container type="folder">13-14</container>
                         <unitdate type="inclusive" normal="1982/2006">1982-2006</unitdate>
                     <physdesc>
+                            <extent type="computed">1 folder</extent>
+                        </physdesc>
+                    </did>
+                </c>
+                <c level="file" id="C1491_c1898">
+                    <did>
+                        <unittitle>Brooks, Lois Wofford</unittitle>
+                        <container type="box">72</container>
+                        <container type="folder">1</container>
+                        <unitdate type="inclusive" normal="1982/2006">1982-2006</unitdate>
+                        <physdesc>
                             <extent type="computed">1 folder</extent>
                         </physdesc>
                     </did>
@@ -17220,6 +17253,7 @@
                             <extent type="computed">1 folder</extent>
                         </physdesc>
                     </did>
+                    <scopecontent><p>An oversize Christmas card from the Clintons dated 1998 can be found with other posters and oversize memorabilia.</p></scopecontent>
                 </c>
                 <c level="file" id="C1491_c1338">
                     <did>
@@ -18721,24 +18755,14 @@
                     <did>
                         <unittitle>L</unittitle>
                         <container type="box">82</container>
-                        <container type="folder">11</container>
+                        <container type="folder">11-12</container>
                         <unitdate type="inclusive" normal="1970/2015">1970-2015</unitdate>
                     <physdesc>
-                            <extent type="computed">1 folder</extent>
+                            <extent type="computed">2 folders</extent>
                         </physdesc>
                     </did>
                 </c>
-                <c level="file" id="C1491_c1475">
-                    <did>
-                        <unittitle>Lacour, Claudia Brodsky</unittitle>
-                        <container type="box">82</container>
-                        <container type="folder">12</container>
-                        <unitdate type="inclusive" normal="1990/2015">1990-2015</unitdate>
-                    <physdesc>
-                            <extent type="computed">1 folder</extent>
-                        </physdesc>
-                    </did>
-                </c>
+                
                 <c level="file" id="C1491_c1476">
                     <did>
                         <unittitle>Ladd, Florence</unittitle>
@@ -18953,7 +18977,7 @@
                 </c>
                 <c level="file" id="C1491_c1495">
                     <did>
-                        <unittitle>Ma, Yo Yo</unittitle>
+                        <unittitle>Ma, Yo-Yo</unittitle>
                         <container type="box">83</container>
                         <container type="folder">16</container>
                         <unitdate normal="1995/1995">1995</unitdate>
@@ -20131,7 +20155,7 @@
                         <unittitle>S</unittitle>
                         <container type="box">92</container>
                         <container type="folder">17-18</container>
-                        <unitdate type="inclusive" normal="1970/2005">1970-2005</unitdate>
+                        <unitdate type="inclusive" normal="1970/2005">1970-2015</unitdate>
                     <physdesc>
                             <extent type="computed">2 folders</extent>
                         </physdesc>
@@ -20142,7 +20166,7 @@
                         <unittitle>S</unittitle>
                         <container type="box">93</container>
                         <container type="folder">1-2</container>
-                        <unitdate type="inclusive" normal="1970/2005">1970-2005</unitdate>
+                        <unitdate type="inclusive" normal="1970/2005">1970-2015</unitdate>
                     <physdesc>
                             <extent type="computed">2 folders</extent>
                         </physdesc>
@@ -20557,7 +20581,7 @@
                 </c>
                 <c level="file" id="C1491_c1640">
                     <did>
-                        <unittitle>Talley, Andre Leon</unittitle>
+                        <unittitle>Talley, André Leon</unittitle>
                         <container type="box">95</container>
                         <container type="folder">6</container>
                         <unitdate normal="2012/2012">2012</unitdate>
@@ -21280,6 +21304,7 @@
                             <extent type="computed">1 folder</extent>
                         </physdesc>
                     </did>
+                    <scopecontent><p>Includes slides.</p></scopecontent>
                 </c>
                 <c level="file" id="C1491_c1705">
                     <did>
@@ -21337,6 +21362,7 @@
                             <extent type="computed">1 folder</extent>
                         </physdesc>
                     </did>
+                    <scopecontent><p>Includes publicity photographs.</p></scopecontent> 
                 </c>
                 <c level="file" id="C1491_c1710">
                     <did>
@@ -21989,11 +22015,22 @@
                             </physdesc>
                         </did>
                     </c>
+                    <c level="file" id="C1491_c1901">
+                        <did>
+                            <unittitle>Cadava, Eduardo</unittitle>
+                            <container type="box">105</container>
+                            <container type="folder">21</container> 
+                            <unitdate type="inclusive" normal="1996/1997">1996-1997</unitdate>
+                            <physdesc>
+                                <extent>1 folder</extent>
+                            </physdesc>
+                        </did>
+                    </c>
                     <c level="file" id="C1491_c1765">
                         <did>
                             <unittitle>Chapel</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">21</container>
+                            <container type="folder">22</container>
                             <unitdate type="inclusive" normal="1990/1998">1990-1998</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22004,7 +22041,7 @@
                         <did>
                             <unittitle>Center for Arts and Cultural Policy Studies</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">22</container>
+                            <container type="folder">23</container>
                             <unitdate type="inclusive" normal="1994/2002">1994-2002</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22015,7 +22052,7 @@
                         <did>
                             <unittitle>Center for Human Values</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">23</container>
+                            <container type="folder">24</container>
                             <unitdate type="inclusive" normal="1994/2004">1994-2004</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22026,7 +22063,7 @@
                         <did>
                             <unittitle>Center of International Studies/Institute for Transregional Study</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">24</container>
+                            <container type="folder">25</container>
                             <unitdate type="inclusive" normal="1995/2000">1995-2000</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22037,7 +22074,7 @@
                         <did>
                             <unittitle>Communications</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">25</container>
+                            <container type="folder">26</container>
                             <unitdate type="inclusive" normal="1987/2001">1987-2001</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22048,7 +22085,7 @@
                         <did>
                             <unittitle>Comparative Literature</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">26</container>
+                            <container type="folder">27</container>
                             <unitdate type="inclusive" normal="1997/1998">1997-1998</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22059,7 +22096,7 @@
                         <did>
                             <unittitle>Council of the Humanities</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">27</container>
+                            <container type="folder">28</container>
                             <unitdate type="inclusive" normal="1988/2010">1988-2010</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22070,7 +22107,7 @@
                         <did>
                             <unittitle>Creative Writing</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">28</container>
+                            <container type="folder">29</container>
                             <unitdate type="inclusive" normal="1987/2005">1987-2005</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22081,7 +22118,7 @@
                         <did>
                             <unittitle>Davis Center</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">29</container>
+                            <container type="folder">30</container>
                             <unitdate type="inclusive" normal="1990/1992">1990-1992</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22092,7 +22129,7 @@
                         <did>
                             <unittitle>Dean of the College</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">30</container>
+                            <container type="folder">31</container>
                             <unitdate type="inclusive" normal="1988/1996">1988-1996</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22103,7 +22140,7 @@
                         <did>
                             <unittitle>Dean of the Faculty</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">31</container>
+                            <container type="folder">32</container>
                             <unitdate type="inclusive" normal="1989/2001">1989-2001</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22114,7 +22151,7 @@
                         <did>
                             <unittitle>Development</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">32</container>
+                            <container type="folder">33</container>
                             <unitdate type="inclusive" normal="1989/2005">1989-2005</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22125,7 +22162,7 @@
                         <did>
                             <unittitle>English</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">33</container>
+                            <container type="folder">34</container>
                             <unitdate type="inclusive" normal="1988/2002">1988-2002</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22136,7 +22173,7 @@
                         <did>
                             <unittitle>Graduate College</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">34</container>
+                            <container type="folder">35</container>
                             <unitdate type="inclusive" normal="1992/1999">1992-1999</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22147,7 +22184,7 @@
                         <did>
                             <unittitle>History/Hellenic Studies</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">35</container>
+                            <container type="folder">36</container>
                             <unitdate type="inclusive" normal="1993/2003">1993-2003</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22158,7 +22195,7 @@
                         <did>
                             <unittitle>Homelessness Project</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">36</container>
+                            <container type="folder">37</container>
                             <unitdate type="inclusive" normal="1991/1992">1991-1992</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22169,7 +22206,7 @@
                         <did>
                             <unittitle>Humanities Council</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">37</container>
+                            <container type="folder">38</container>
                             <unitdate type="inclusive" normal="1989/1994">1989-1994</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22183,7 +22220,7 @@
                         <did>
                             <unittitle>Human Resources</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">38</container>
+                            <container type="folder">39</container>
                             <unitdate normal="1992/1992">1992</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22194,7 +22231,7 @@
                         <did>
                             <unittitle>Library, Mathey College, Near Eastern Studies</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">39</container>
+                            <container type="folder">40</container>
                             <unitdate type="inclusive" normal="1993/2005">1993-2005</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22205,7 +22242,7 @@
                         <did>
                             <unittitle>Miscellaneous</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">40</container>
+                            <container type="folder">41</container>
                             <unitdate type="inclusive" normal="1987/2011">1987-2011</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22216,7 +22253,7 @@
                         <did>
                             <unittitle>Move to Dickinson</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">41</container>
+                            <container type="folder">42</container>
                             <unitdate type="inclusive" normal="1988/1990">1988-1990</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22227,7 +22264,7 @@
                         <did>
                             <unittitle>Moving Preparation</unittitle>
                             <container type="box">105</container>
-                            <container type="folder">42</container>
+                            <container type="folder">43</container>
                             <unitdate type="inclusive" normal="2001/2002">2001-2002</unitdate>
                         <physdesc>
                                 <extent type="computed">1 folder</extent>
@@ -22950,7 +22987,7 @@
                             <did>
                                 <unittitle>Syllabi, Schedules, Etc.</unittitle>
                                 <container type="box">109</container>
-                                <container type="folder">14</container>
+                                <container type="folder">15</container>
                                 <unitdate type="inclusive" normal="1985/1994">1985-1994</unitdate>
                             <physdesc>
                                     <extent type="computed">portion of 1 folder</extent>
@@ -23227,17 +23264,14 @@
                         <c level="file" id="C1491_c1877">
                             <did>
                                 <unittitle>Miscellaneous Lecture Material</unittitle>
-                                <container type="box">110</container>
+                                <container type="box">111</container>
                                 <container type="folder">5-6</container>
                                 <unitdate type="inclusive" normal="1989/1996">circa 1989-1996</unitdate>
                             <physdesc>
                                     <extent type="computed">2 folders</extent>
                                 </physdesc>
                             </did>
-                            <scopecontent>
-                                <p>See also <emph render="italic">Playing in the Dark</emph>
-                                </p>
-                            </scopecontent>
+                            
                         </c>
                         <c level="file" id="C1491_c1878">
                             <did>
@@ -23478,6 +23512,20 @@
                                 </physdesc>
                             </did>
                         </c>
+                    </c>
+                    <c level="file" id="C1491_c1900">
+                        <did>
+                            <unittitle>Student Files</unittitle>
+                            <container type="box">114</container>
+                            <container type="folder">18-19</container>
+                            <unitdate type="inclusive" normal="1992/1994">1992-1994</unitdate>
+                            <physdesc>
+                                <extent>2 folders</extent>
+                            </physdesc>
+                        </did>
+                        <accessrestrict type="closed">
+                            <p>This material is closed until 2069.</p>
+                        </accessrestrict>
                     </c>
                 </c>
             </c> 
