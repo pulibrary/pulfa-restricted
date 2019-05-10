@@ -16,8 +16,8 @@
 
    <xsl:output method="html" indent="yes" encoding="UTF-8" doctype-system="about:legacy-compat"/>
 
-   <xsl:param name="xslt.base-uri" as="xs:string"/>
-   <xsl:param name="xslt.record-id" as="xs:string"/>
+   <xsl:param name="xslt.base-uri" as="xs:string" select="'file:///C:/Users/Public/Documents/morrison'"/>
+   <xsl:param name="xslt.record-id" as="xs:string" select="'C1491'"/>
    <xsl:include href="lib.xsl"/> 
    <xsl:include href="includes.xsl"/> 
    
