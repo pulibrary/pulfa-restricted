@@ -16,8 +16,6 @@
 
    <xsl:output method="html" indent="yes" encoding="UTF-8" doctype-system="about:legacy-compat"/>
 
-   <xsl:param name="xslt.base-uri" as="xs:string" select="'file:///C:/Users/Public/Documents/morrison'"/>
-   <xsl:param name="xslt.record-id" as="xs:string" select="'C1491'"/>
    <xsl:include href="lib.xsl"/> 
    <xsl:include href="includes.xsl"/> 
    
@@ -26,7 +24,6 @@
    <xsl:template match="ead:revisiondesc"/>
 
    <xsl:variable name="aeon-url" select="'https://libweb10.princeton.edu/aeon/Aeon.dll'" />
-   <xsl:variable name="collections-base-uri" select="concat($xslt.base-uri, '/collections')" as="xs:string"/>
    <xsl:variable name="repo">
       <xsl:choose>
          <xsl:when test="//ead:archdesc/ead:did/ead:repository[@id='univarchives']">
@@ -117,22 +114,16 @@
    <xsl:template match="/">
       <html xmlns="http://www.w3.org/1999/xhtml">
          <head>
-            <base href="{$xslt.base-uri}/"/>
             <title>
                 <xsl:value-of select="$repo"/><xsl:value-of select="//ead:titleproper[1]"/>
             </title>
-            <xsl:call-template name="standard-head">
-               <xsl:with-param name="base-uri" select="$xslt.base-uri"></xsl:with-param>
-            </xsl:call-template>
+            <xsl:call-template name="standard-head"/>
             <xsl:call-template name="standard-css"/>
             <link rel="stylesheet" type="text/css" href="css/classic.css" media="all"/>
-            <link rel="canonical" href="{$xslt.base-uri}/{$xslt.record-id}.html"/>
          </head>
          <body>
             <xsl:call-template name="alt-nav">
                <xsl:with-param name="focus" select="'collections'"/>
-               <xsl:with-param name="base-uri" select="$xslt.base-uri"/>
-               <xsl:with-param name="record-id" select="$xslt.record-id"/>
             </xsl:call-template>
             
             <div class="container">
@@ -174,14 +165,14 @@
          </li>-->
          <xsl:if test="//ead:archdesc/ead:did">
             <li>
-               <a href="{$xslt.base-uri}/index.html#collectionDid">
+               <a href="#collectionDid">
                   <xsl:text>Summary Information</xsl:text>
                </a>
             </li>
          </xsl:if>
          <xsl:if test="//ead:archdesc/ead:bioghist[p]">
             <li>
-               <a href="{$xslt.base-uri}/index.html#bioghist">
+               <a href="#bioghist">
                   <xsl:choose>
                      <xsl:when test="../ead:did/ead:origination/*[@encodinganalog='100']">
                         <xsl:text>Biography</xsl:text>
@@ -202,7 +193,7 @@
          </xsl:if>
          <xsl:if test="//ead:archdesc/ead:descgrp[@id='dacs3']/ead:scopecontent">
             <li>
-               <a href="{$xslt.base-uri}/index.html#scopecontent">
+               <a href="#scopecontent">
                   <!--<xsl:value-of
                             select="//ead:archdesc/ead:descgrp[@id='dacs3']/ead:scopecontent/ead:head"
                         />-->
@@ -212,23 +203,23 @@
          </xsl:if>
          <xsl:if test="//ead:archdesc/ead:descgrp[@id='dacs3']/ead:arrangement">
             <li>
-               <a href="{$xslt.base-uri}/index.html#arrangement">Arrangement</a>
+               <a href="#arrangement">Arrangement</a>
             </li>
          </xsl:if>
          <xsl:if test="//ead:archdesc/ead:descgrp[@id='dacs4']">
             <li>
-               <a href="{$xslt.base-uri}/index.html#accessrestrict">Information for Users</a>
+               <a href="#accessrestrict">Information for Users</a>
             </li>
          </xsl:if>
          <!--<xsl:if test="//ead:archdesc/ead:controlaccess">
             <li>
-               <a href="{$xslt.base-uri}/index.html#controlaccess">Subject Headings</a>
+               <a href="#controlaccess">Subject Headings</a>
             </li>
          </xsl:if>-->
 
          <xsl:if test="//ead:archdesc/ead:dsc">
             <li>
-               <a href="{$xslt.base-uri}/index.html#dsc">Contents List</a>
+               <a href="#dsc">Contents List</a>
             </li>
          </xsl:if>
 
@@ -238,7 +229,7 @@
             //ead:archdesc/ead:dsc/(ead:c01[@level='subgrp']|ead:c[@level='subgrp'])">
             <xsl:variable name="sansUnitdate" select="replace(ead:did/ead:unittitle, '(.*),\s*\d\d\d\d.*', '$1', 'm')"/>
             <li>
-               <a href="{$xslt.base-uri}/index.html#{@id}">
+               <a href="#{@id}">
                   <xsl:value-of select="$sansUnitdate"/>
                </a>
             </li>
@@ -4793,7 +4784,7 @@
                      <li>
                         <a>
                            <xsl:attribute name="href">
-                              <xsl:value-of select="concat($xslt.base-uri, '/collections/', $xslt.record-id, '#', generate-id(.))"/>
+                              <xsl:value-of select="concat('#', generate-id(.))"/>
                            </xsl:attribute>
                            <xsl:if test="self::ead:*/@level='subseries'">
                               <xsl:attribute name="style">margin-left:2em;</xsl:attribute>
@@ -5399,13 +5390,6 @@ If only unitdate or only unittitle, display as is.  -->
                         <xsl:apply-templates select="ead:relatedmaterial"/>
                         <xsl:apply-templates select="ead:bibliography"/>
                         <xsl:apply-templates select="ead:separatedmaterial"/>
-                        
-                        <!-- Added originalsloc, RH: langmaterial, odd, phystech, otherfindaid, custodhist, acqinfo, appraisal, accruals, relatedmaterial,
-                                bibliography, separatedmaterial-->
-                        <!-- any others? -->
-                        <!--<p>
-                           <a href="{$xslt.base-uri}/index.html#dsc">Back to Top of Contents List</a>
-                        </p>-->
                      </td>
                      <xsl:if test="(ead:did/ead:container | ead:did/ead:unitid[@type='itemnumber'])">
         

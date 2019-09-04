@@ -5,8 +5,7 @@
    <xsl:strip-space elements="*"/>
 
    <xsl:template name="standard-head">
-      <xsl:param name="base-uri"></xsl:param>
-      <link href="{concat($base-uri,'/favicon.ico')}" rel="shortcut icon"></link>
+      <link href="favicon.ico" rel="shortcut icon"></link>
    </xsl:template>
 
    <xsl:template name="standard-css" as="element()*">
@@ -106,8 +105,6 @@
    
    <xsl:template name="alt-nav">
       <xsl:param name="focus" as="xs:string?"/>
-      <xsl:param name="base-uri" as="xs:string"/>
-      <xsl:param name="record-id" as="xs:string"/>
       
       <div class="thinbar">
          <div class="container">
@@ -120,7 +117,7 @@
             <div class="container">
                <xsl:element name="a">
                   <xsl:attribute name="class">brand</xsl:attribute>
-                  <xsl:attribute name="href"><xsl:value-of select="$base-uri"/><xsl:value-of select="$record-id"/>.html</xsl:attribute>
+                  <xsl:attribute name="href">index.html</xsl:attribute>
                   <img src="pul_bug_small.png" class="pulbug" />
                   Princeton University Library Finding Aids </xsl:element>
             </div>
