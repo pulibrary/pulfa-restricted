@@ -50,7 +50,8 @@
          <xsl:when test="$repo eq 'Engineering Library'">
             <xsl:text>http://library.princeton.edu/engineering</xsl:text>
          </xsl:when>
-         <xsl:otherwise>http://diglib.princeton.edu/ead/</xsl:otherwise>
+<!-- RH 2022: Replace superseded link-->
+      	<xsl:otherwise>https://library.princeton.edu/special-collections/</xsl:otherwise>
       </xsl:choose>
    </xsl:variable>
    <xsl:variable name="repocontact">
