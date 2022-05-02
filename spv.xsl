@@ -310,7 +310,7 @@
             <xsl:variable name="subjectName" select="replace(., '(\.| )$', '', 'm')"/>
             <xsl:variable name="voyQuery">
                <xsl:value-of select="$VOYAGER_QUERY_BASE"/>
-               <xsl:text>?utf8=✓&amp;search_field=all_fields&amp;q=</xsl:text>
+               <xsl:text>?utf8=true&amp;search_field=all_fields&amp;q=</xsl:text>
                <xsl:value-of select="replace(normalize-space($subjectName), ' ', '+', 'm')"/>
 <!-- RH 2022 Do we still need this? -->
 <!--               <xsl:text>&amp;Search_Code=NAME_&amp;CNT=50</xsl:text>-->
@@ -4903,7 +4903,7 @@
                      <xsl:variable name="subjectTopic" select="replace(., '(\.| )$', '', 'm')"/>
                      <xsl:variable name="query">
                         <xsl:value-of select="$VOYAGER_QUERY_BASE"/>
-                        <xsl:text>?utf8=✓&amp;search_field=subject&amp;q=</xsl:text>
+                        <xsl:text>?utf8=true&amp;search_field=subject&amp;q=</xsl:text>
                         <xsl:value-of select="replace(normalize-space($subjectTopic), ' ', '+', 'm')"/>
                         <!--<xsl:text>&amp;CNT=50</xsl:text>-->
                      </xsl:variable>
