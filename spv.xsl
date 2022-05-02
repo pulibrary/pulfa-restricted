@@ -307,7 +307,7 @@
             <xsl:text>Creator: </xsl:text>
          </dt>
          <dd class="archdescData">
-            <xsl:variable name="subjectName" select="replace(., '(.| )$', '', 'm')"/>
+            <xsl:variable name="subjectName" select="replace(., '(\.| )$', '', 'm')"/>
             <xsl:variable name="voyQuery">
                <xsl:value-of select="$VOYAGER_QUERY_BASE"/>
                <xsl:text>?utf8=✓&amp;search_field=all_fields&amp;q=</xsl:text>
@@ -4834,9 +4834,9 @@
    </xsl:template>
 
    <!-- descgrp[id="dacs7"]/* (processinfo) =============================== -->
-   <xsl:template match="ead:prefercite | ead:processinfo">
+	<xsl:template match="ead:prefercite | ead:processinfo | ead:bibliography">
       <h4 id="processinfo">Processing and Other Information</h4>
-      <xsl:apply-templates select="ead:processinfo|ead:bibliography"/>
+		<xsl:apply-templates select="ead:prefercite | ead:processinfo | ead:bibliography"/>
       <!--            <xsl:with-param name="id" select="'processinfo'"/>
         </xsl:apply-templates>-->
 
