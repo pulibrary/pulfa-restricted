@@ -15,8 +15,10 @@
    xmlns:ov="http://open.vocab.org/terms/" xmlns:vc="http://www.w3.org/2006/vcard/ns#">
 
    <xsl:output method="html" indent="yes" encoding="UTF-8" doctype-system="about:legacy-compat"/>
-
-   <xsl:param name="xslt.base-uri" as="xs:string" select="'file:///C:/Users/Public/Documents/morrison'"/>
+	
+   <!--<xsl:param name="xslt.base-uri" as="xs:string" select="'file:///C:/Users/Public/Documents/morrison'"/>-->
+	<xsl:param name="xslt.base-uri" as="xs:string" select="'/Users/heberleinr/Documents/pulfa-restricted'"/>
+	
    <xsl:param name="xslt.record-id" as="xs:string" select="'C1491'"/>
    <xsl:include href="lib.xsl"/> 
    <xsl:include href="includes.xsl"/> 
@@ -27,32 +29,12 @@
 
    <xsl:variable name="aeon-url" select="'https://libweb10.princeton.edu/aeon/Aeon.dll'" />
    <xsl:variable name="collections-base-uri" select="concat($xslt.base-uri, '/collections')" as="xs:string"/>
-   <xsl:variable name="repo">
-      <xsl:choose>
-         <xsl:when test="//ead:archdesc/ead:did/ead:repository[@id='univarchives']">
-            <xsl:text>Mudd Manuscript Library</xsl:text>
-         </xsl:when>
-         <xsl:when test="//ead:archdesc/ead:did/ead:repository[@id='mss']">
-            <xsl:text>Manuscripts Division</xsl:text>
-         </xsl:when>
-         <xsl:when test="//ead:archdesc/ead:did/ead:repository[@id='lae']">
-            <xsl:text>Latin American Collections</xsl:text>
-         </xsl:when>
-         <xsl:when test="//ead:archdesc/ead:did/ead:repository[@id='eng']">
-            <xsl:text>Engineering Library</xsl:text>
-         </xsl:when>
-         <xsl:when test="//ead:archdesc/ead:did/ead:repository[@id='publicpolicy']">
-            <xsl:text>Mudd Manuscript Library</xsl:text>
-         </xsl:when>
-         <xsl:when test="//ead:archdesc/ead:did/ead:repository[@id='rarebooks']">
-            <xsl:text>Rare Book Division</xsl:text>
-         </xsl:when>
-         <xsl:otherwise>Finding Aids</xsl:otherwise>
-      </xsl:choose>
-   </xsl:variable>
+<!-- RH 2022: aspace path is archdesc/did/repository/corpname; no attributes; this is a controlled value so no need for string-matching  -->   
+<xsl:variable name="repo">
+	<xsl:value-of select="//ead:archdesc/ead:did/ead:repository/ead:corpname"/>
+</xsl:variable>
    <xsl:variable name="repohref">
       <xsl:choose>
-         
          <xsl:when test="$repo eq 'Mudd Manuscript Library'">
             <xsl:text>http://rbsc.princeton.edu/mudd</xsl:text>
          </xsl:when>
