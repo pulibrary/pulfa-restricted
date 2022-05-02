@@ -164,16 +164,19 @@
                </a>
             </li>
          </xsl:if>
-         <xsl:if test="//ead:archdesc/ead:bioghist[p]">
+<!-- RH 2022: This will never be true, adding namespace prefix -->
+         <xsl:if test="//ead:archdesc/ead:bioghist[ead:p]">
             <li>
                <a href="{$xslt.base-uri}/index.html#bioghist">
                   <xsl:choose>
-                     <xsl:when test="../ead:did/ead:origination/*[@encodinganalog='100']">
+<!-- RH 2022: We need to distinguish these by nested element, @encodinganalog was lost during the migration-->
+<!-- RH 2022: relative path doesn't work here, changing to absolute -->
+                  	<xsl:when test="//ead:archdesc/ead:did/ead:origination/(ead:persname|ead:famname)">
                         <xsl:text>Biography</xsl:text>
                      </xsl:when>
                      <xsl:otherwise>
                         <xsl:choose>
-                           <xsl:when test="../ead:did/ead:origination/*[@encodinganalog='110']">
+                        	<xsl:when test="//ead:archdesc/ead:did/ead:origination/ead:corpname">
                               <xsl:text>Organizational History</xsl:text>
                            </xsl:when>
                            <xsl:otherwise>
