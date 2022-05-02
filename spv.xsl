@@ -66,7 +66,7 @@
             <xsl:text>http://rbsc.princeton.edu/ask-question/</xsl:text>
          </xsl:when>
          <xsl:when test="$repo eq 'Latin American Collections'">
-            <xsl:text>http://library.princeton.edu/help/ask.php</xsl:text>
+            <xsl:text>https://libguides.princeton.edu/laec</xsl:text>
          </xsl:when>
          <xsl:when test="$repo eq 'Engineering Library'">
             <xsl:text>http://library.princeton.edu/engineering</xsl:text>
@@ -74,7 +74,7 @@
          <xsl:when test="$repo eq 'Mendel Music Library'">
             <xsl:text>http://library.princeton.edu/music</xsl:text>
          </xsl:when>
-         <xsl:otherwise>http://findingaids.princeton.edu</xsl:otherwise>
+       	<xsl:otherwise>https://library.princeton.edu/special-collections/</xsl:otherwise>
       </xsl:choose>
    </xsl:variable>
    <xsl:variable name="ark" select="/ead:ead/ead:eadheader/ead:eadid/@url"/>
