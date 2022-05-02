@@ -215,6 +215,7 @@
             </li>
          </xsl:if>-->
 
+<!--RH 2022: remove type attribute -->
          <xsl:if test="//ead:archdesc/ead:dsc">
             <li>
                <a href="{$xslt.base-uri}/index.html#dsc">Contents List</a>
@@ -5296,7 +5297,7 @@ If only unitdate or only unittitle, display as is.  -->
       </xsl:choose>
    </xsl:template>
 
-
+<!-- RH 2022: remove type attribute -->
    <xsl:template match="ead:dsc">
       <!--        <xsl:choose>
             <xsl:when test="child::ead:head">
