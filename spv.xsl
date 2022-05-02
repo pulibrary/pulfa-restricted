@@ -77,11 +77,13 @@
        	<xsl:otherwise>https://library.princeton.edu/special-collections/</xsl:otherwise>
       </xsl:choose>
    </xsl:variable>
-   <xsl:variable name="ark" select="/ead:ead/ead:eadheader/ead:eadid/@url"/>
-   <xsl:variable name="id" select="/ead:ead/ead:eadheader/ead:eadid/@urn"/>
-  
+<!-- RH 2022 are these still used? -->
+   <!--<xsl:variable name="ark" select="/ead:ead/ead:eadheader/ead:eadid/@url"/>
+   <xsl:variable name="id" select="substring-after(/ead:ead/ead:eadheader/ead:eadid/@url, 'princeton.edu/')"/>
+  -->
+<!-- RH 2022 update link -->
    <xsl:variable name="VOYAGER_QUERY_BASE">
-      <xsl:value-of select="'http://catalog.princeton.edu/cgi-bin/Pwebrecon.cgi?DB=local'"/>
+   	<xsl:value-of select="'https://catalog.princeton.edu/catalog'"/>
    </xsl:variable>
 
    <xsl:function name="pul:strip-trailspace">
@@ -303,9 +305,10 @@
             <xsl:variable name="subjectName" select="replace(., '(.| )$', '', 'm')"/>
             <xsl:variable name="voyQuery">
                <xsl:value-of select="$VOYAGER_QUERY_BASE"/>
-               <xsl:text>&amp;Search_Arg=</xsl:text>
+               <xsl:text>?utf8=✓&amp;search_field=all_fields&amp;q=</xsl:text>
                <xsl:value-of select="replace(normalize-space($subjectName), ' ', '+', 'm')"/>
-               <xsl:text>&amp;Search_Code=NAME_&amp;CNT=50</xsl:text>
+<!-- RH 2022 Do we still need this? -->
+<!--               <xsl:text>&amp;Search_Code=NAME_&amp;CNT=50</xsl:text>-->
             </xsl:variable>
             <a href="{$voyQuery}">
                <xsl:apply-templates/>
@@ -4892,9 +4895,9 @@
                      <xsl:variable name="subjectTopic" select="replace(., '(\.| )$', '', 'm')"/>
                      <xsl:variable name="query">
                         <xsl:value-of select="$VOYAGER_QUERY_BASE"/>
-                        <xsl:text>&amp;SC=Subject&amp;SA=</xsl:text>
+                        <xsl:text>?utf8=✓&amp;search_field=subject&amp;q=</xsl:text>
                         <xsl:value-of select="replace(normalize-space($subjectTopic), ' ', '+', 'm')"/>
-                        <xsl:text>&amp;CNT=50</xsl:text>
+                        <!--<xsl:text>&amp;CNT=50</xsl:text>-->
                      </xsl:variable>
                      <li>
                         <a href="{$query}">
