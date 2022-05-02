@@ -273,12 +273,12 @@
       <xsl:apply-templates select="ead:bioghist"/>
       <xsl:apply-templates select="ead:scopecontent"/>
       <xsl:apply-templates select="ead:arrangement"/>
-      <xsl:apply-templates select="ead:accessrestrict | ead:userestrict"/>
+      <xsl:apply-templates select="ead:accessrestrict | ead:userestrict | ead:phystech"/>
       <xsl:apply-templates select="ead:acqinfo | ead:appraisal | ead:accruals"/>
       <xsl:apply-templates select="ead:relatedmaterial"/>
       <xsl:apply-templates select="ead:prefercite | ead:processinfo"/>
       <!--<xsl:apply-templates select="ead:controlaccess"/>-->
-      <xsl:apply-templates select="ead:dsc[@type='combined']"/>
+      <xsl:apply-templates select="ead:dsc"/>
       <xsl:apply-templates select="ead:index"/>
       <xsl:apply-templates select="ead:odd"/>
    </xsl:template>
@@ -4810,7 +4810,7 @@
    </xsl:template>
 
    <!-- descgrp[id="dacs4"]/* (accessrestrict) ============================= -->
-   <xsl:template match="ead:accessrestrict | ead:userestrict">
+   <xsl:template match="ead:accessrestrict | ead:userestrict | ead:phystech">
       <h4 id="accessrestrict">Access and Use</h4>
       <xsl:apply-templates/>
       <!--<xsl:with-param name="id" select="'accessrestrict'"/>
@@ -5297,7 +5297,7 @@ If only unitdate or only unittitle, display as is.  -->
    </xsl:template>
 
 
-   <xsl:template match="ead:dsc[@type='combined']">
+   <xsl:template match="ead:dsc">
       <!--        <xsl:choose>
             <xsl:when test="child::ead:head">
                 <h4 id="dsc">
