@@ -188,7 +188,8 @@
                </a>
             </li>
          </xsl:if>
-         <xsl:if test="//ead:archdesc/ead:descgrp[@id='dacs3']/ead:scopecontent">
+<!-- RH 2022: fix paths to notes -->
+         <xsl:if test="//ead:archdesc/ead:scopecontent">
             <li>
                <a href="{$xslt.base-uri}/index.html#scopecontent">
                   <!--<xsl:value-of
@@ -198,12 +199,12 @@
                </a>
             </li>
          </xsl:if>
-         <xsl:if test="//ead:archdesc/ead:descgrp[@id='dacs3']/ead:arrangement">
+         <xsl:if test="//ead:archdesc/ead:arrangement">
             <li>
                <a href="{$xslt.base-uri}/index.html#arrangement">Arrangement</a>
             </li>
          </xsl:if>
-         <xsl:if test="//ead:archdesc/ead:descgrp[@id='dacs4']">
+         <xsl:if test="//ead:archdesc/ead:accessrestrict">
             <li>
                <a href="{$xslt.base-uri}/index.html#accessrestrict">Information for Users</a>
             </li>
@@ -266,15 +267,16 @@
 
    <!-- ead:archdesc/* ======================================== -->
    <xsl:template match="ead:archdesc">
+<!-- RH 2022: Fix paths post-migration; no more dacs groupings for the notes -->
       <!--<xsl:apply-templates/>-->
       <xsl:apply-templates select="ead:did"/>
       <xsl:apply-templates select="ead:bioghist"/>
-      <xsl:apply-templates select="ead:descgrp[@id='dacs3']/ead:scopecontent"/>
-      <xsl:apply-templates select="ead:descgrp[@id='dacs3']/ead:arrangement"/>
-      <xsl:apply-templates select="ead:descgrp[@id='dacs4']"/>
-      <xsl:apply-templates select="ead:descgrp[@id='dacs5']"/>
-      <xsl:apply-templates select="ead:descgrp[@id='dacs6']"/>
-      <xsl:apply-templates select="ead:descgrp[@id='dacs7']"/>
+      <xsl:apply-templates select="ead:scopecontent"/>
+      <xsl:apply-templates select="ead:arrangement"/>
+      <xsl:apply-templates select="ead:accessrestrict | ead:userestrict"/>
+      <xsl:apply-templates select="ead:acqinfo | ead:appraisal | ead:accruals"/>
+      <xsl:apply-templates select="ead:relatedmaterial"/>
+      <xsl:apply-templates select="ead:prefercite | ead:processinfo"/>
       <!--<xsl:apply-templates select="ead:controlaccess"/>-->
       <xsl:apply-templates select="ead:dsc[@type='combined']"/>
       <xsl:apply-templates select="ead:index"/>
@@ -4762,14 +4764,16 @@
    </xsl:template>
 
    <!-- descgrp[@id eq 'dacs3'] (scopecontent and arrangement) ============= -->
-   <xsl:template match="ead:descgrp[@id='dacs3']/ead:scopecontent">
+	<!-- RH 2022: Fix paths post-migration; no more dacs groupings for the notes -->
+	
+   <xsl:template match="ead:scopecontent">
       <h4 id="scopecontent">Description</h4>
       <xsl:apply-templates/>
       <!--<xsl:with-param name="id" select="'scopecontent'"/>
         </xsl:apply-templates>-->
    </xsl:template>
 
-   <xsl:template match="ead:descgrp[@id='dacs3']/ead:arrangement">
+   <xsl:template match="ead:arrangement">
       <h4 id="arrangement">Arrangement</h4>
       <xsl:apply-templates select="ead:p"/>
       <xsl:choose>
@@ -4806,7 +4810,7 @@
    </xsl:template>
 
    <!-- descgrp[id="dacs4"]/* (accessrestrict) ============================= -->
-   <xsl:template match="ead:descgrp[@id='dacs4']">
+   <xsl:template match="ead:accessrestrict | ead:userestrict">
       <h4 id="accessrestrict">Access and Use</h4>
       <xsl:apply-templates/>
       <!--<xsl:with-param name="id" select="'accessrestrict'"/>
@@ -4814,7 +4818,7 @@
    </xsl:template>
 
    <!-- descgrp[id="dacs5"]/* (acqinfo) ==================================== -->
-   <xsl:template match="ead:descgrp[@id='dacs5']">
+   <xsl:template match="ead:acqinfo | ead:appraisal | ead:accruals">
       <h4 id="acqinfo">Acquisition and Appraisal</h4>
       <xsl:apply-templates/>
       <!--            <xsl:with-param name="id" select="'acqinfo'"/>
@@ -4822,7 +4826,7 @@
    </xsl:template>
 
    <!-- descgrp[id="dacs6"]/* (relatedmaterial) ============================ -->
-   <xsl:template match="ead:descgrp[@id='dacs6']">
+   <xsl:template match="ead:relatedmaterial">
       <h4 id="relatedmaterial">Related Materials</h4>
       <xsl:apply-templates/>
       <!--            <xsl:with-param name="id" select="'relatedmaterial'"/>
@@ -4830,7 +4834,7 @@
    </xsl:template>
 
    <!-- descgrp[id="dacs7"]/* (processinfo) =============================== -->
-   <xsl:template match="ead:descgrp[@id='dacs7']">
+   <xsl:template match="ead:prefercite | ead:processinfo">
       <h4 id="processinfo">Processing and Other Information</h4>
       <xsl:apply-templates select="ead:processinfo|ead:bibliography"/>
       <!--            <xsl:with-param name="id" select="'processinfo'"/>
