@@ -4735,21 +4735,22 @@
    <xsl:template match="ead:archdesc/ead:bioghist">
       <xsl:if test="ead:p">
          <h4 id="bioghist">
-            <xsl:choose>
-               <xsl:when test="../ead:did/ead:origination/*[@encodinganalog='100']">
-                  <xsl:text>Biography</xsl:text>
-               </xsl:when>
-               <xsl:otherwise>
-                  <xsl:choose>
-                     <xsl:when test="../ead:did/ead:origination/*[@encodinganalog='110']">
-                        <xsl:text>Organizational History</xsl:text>
-                     </xsl:when>
-                     <xsl:otherwise>
-                        <xsl:text>Biography/History</xsl:text>
-                     </xsl:otherwise>
-                  </xsl:choose>
-               </xsl:otherwise>
-            </xsl:choose>
+         	<xsl:choose>
+         		<!-- RH 2022: We need to distinguish these by nested element, @encodinganalog was lost during the migration-->
+         		<xsl:when test="../ead:did/ead:origination/(ead:persname|ead:famname)">
+         			<xsl:text>Biography</xsl:text>
+         		</xsl:when>
+         		<xsl:otherwise>
+         			<xsl:choose>
+         				<xsl:when test="../ead:did/ead:origination/ead:corpname">
+         					<xsl:text>Organizational History</xsl:text>
+         				</xsl:when>
+         				<xsl:otherwise>
+         					<xsl:text>Biography/History</xsl:text>
+         				</xsl:otherwise>
+         			</xsl:choose>
+         		</xsl:otherwise>
+         	</xsl:choose>
          </h4>
          <xsl:apply-templates select="*[not(self::ead:dao)]"/>
       </xsl:if>
