@@ -304,7 +304,7 @@
 				</dd>
 			</xsl:if>
 			<!--<xsl:apply-templates select="ead:physdesc"/>-->
-			<xsl:apply-templates select="ead:unitid"/>
+			<xsl:apply-templates select="ead:unitid[not(@audience='internal')]"/>
 			<xsl:apply-templates select="ead:repository"/>
 			<xsl:apply-templates select="ead:langmaterial"/>
 			<xsl:if test="ead:physloc">
