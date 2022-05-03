@@ -303,7 +303,7 @@
 
    <!-- descendants of ead:did ============================================= -->
    <xsl:template match="ead:archdesc/ead:did/ead:origination">
-      <xsl:for-each select="ead:persname|ead:corpname|ead:famname|ead:name">
+      <xsl:for-each select="(ead:persname|ead:corpname|ead:famname|ead:name)[@role='cre']">
          <dt class="archdescLabel">
             <xsl:text>Creator: </xsl:text>
          </dt>
