@@ -261,7 +261,11 @@
 			<h4 id="accessrestrict">Access and Use</h4>
 			<xsl:apply-templates select="ead:accessrestrict | ead:userestrict | ead:phystech"/>
 		</xsl:if>
-		<xsl:apply-templates select="ead:acqinfo | ead:appraisal | ead:accruals"/>
+		<xsl:if test="ead:acqinfo | ead:appraisal | ead:accruals">
+	<h4 id="acqinfo">Acquisition and Appraisal</h4>
+			<xsl:apply-templates select="ead:acqinfo | ead:appraisal | ead:accruals"/>
+</xsl:if>
+		
 		<xsl:apply-templates select="ead:relatedmaterial"/>
 		<xsl:apply-templates select="ead:prefercite | ead:processinfo"/>
 		<!--<xsl:apply-templates select="ead:controlaccess"/>-->
@@ -4901,13 +4905,6 @@
 		</xsl:choose>
 		<!--        <xsl:apply-templates/>-->
 		<!--            <xsl:with-param name="id" select="'arrangement'"/>
-        </xsl:apply-templates>-->
-	</xsl:template>
-	<!-- descgrp[id="dacs5"]/* (acqinfo) ==================================== -->
-	<xsl:template match="ead:acqinfo | ead:appraisal | ead:accruals">
-		<h4 id="acqinfo">Acquisition and Appraisal</h4>
-		<xsl:apply-templates/>
-		<!--            <xsl:with-param name="id" select="'acqinfo'"/>
         </xsl:apply-templates>-->
 	</xsl:template>
 	<!-- descgrp[id="dacs6"]/* (relatedmaterial) ============================ -->
