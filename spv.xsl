@@ -256,7 +256,11 @@
 		<xsl:apply-templates select="ead:bioghist"/>
 		<xsl:apply-templates select="ead:scopecontent"/>
 		<xsl:apply-templates select="ead:arrangement"/>
-		<xsl:apply-templates select="ead:accessrestrict | ead:userestrict | ead:phystech"/>
+<!-- RH 2022 handle headers for former dacs groups here -->
+		<xsl:if test="ead:accessrestrict | ead:userestrict | ead:phystech">
+			<h4 id="accessrestrict">Access and Use</h4>
+			<xsl:apply-templates select="ead:accessrestrict | ead:userestrict | ead:phystech"/>
+		</xsl:if>
 		<xsl:apply-templates select="ead:acqinfo | ead:appraisal | ead:accruals"/>
 		<xsl:apply-templates select="ead:relatedmaterial"/>
 		<xsl:apply-templates select="ead:prefercite | ead:processinfo"/>
@@ -4844,7 +4848,7 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</h4>
-<xsl:apply-templates select="ead:note/text()"></xsl:apply-templates>
+			<xsl:apply-templates select="ead:note/text()"/>
 			<xsl:apply-templates select="*[not(self::ead:dao or self::ead:note)]"/>
 		</xsl:if>
 	</xsl:template>
@@ -4854,13 +4858,13 @@
 	</xsl:template>
 	<!-- descgrp[@id eq 'dacs3'] (scopecontent and arrangement) ============= -->
 	<!-- RH 2022: Fix paths post-migration; no more dacs groupings for the notes -->
-	<xsl:template match="ead:scopecontent">
+	<xsl:template match="ead:archdesc/ead:scopecontent">
 		<h4 id="scopecontent">Description</h4>
 		<xsl:apply-templates/>
 		<!--<xsl:with-param name="id" select="'scopecontent'"/>
         </xsl:apply-templates>-->
 	</xsl:template>
-	<xsl:template match="ead:arrangement">
+	<xsl:template match="ead:archdesc/ead:arrangement">
 		<h4 id="arrangement">Arrangement</h4>
 		<xsl:apply-templates select="ead:p"/>
 		<xsl:choose>
@@ -4897,13 +4901,6 @@
 		</xsl:choose>
 		<!--        <xsl:apply-templates/>-->
 		<!--            <xsl:with-param name="id" select="'arrangement'"/>
-        </xsl:apply-templates>-->
-	</xsl:template>
-	<!-- descgrp[id="dacs4"]/* (accessrestrict) ============================= -->
-	<xsl:template match="ead:accessrestrict | ead:userestrict | ead:phystech">
-		<h4 id="accessrestrict">Access and Use</h4>
-		<xsl:apply-templates/>
-		<!--<xsl:with-param name="id" select="'accessrestrict'"/>
         </xsl:apply-templates>-->
 	</xsl:template>
 	<!-- descgrp[id="dacs5"]/* (acqinfo) ==================================== -->
