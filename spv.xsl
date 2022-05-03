@@ -313,11 +313,20 @@
       		<dt class="archdescLabel">
       			<xsl:text>Size: </xsl:text>
       		</dt>
-      		<xsl:for-each select="ead:physdesc/ead:extent">
+      		<xsl:for-each select="ead:physdesc[@altrender='whole']/ead:extent">
       			<dd class="archdescData">
       				<xsl:apply-templates/>
       			</dd>
       		</xsl:for-each>
+      		<xsl:if test="ead:physdesc[@altrender='part']/ead:extent">
+      			<dd class="archdescData">
+      				<xsl:for-each select="ead:physdesc[@altrender='part'][not(position()=last())]/ead:extent">
+					<xsl:apply-templates/>
+					<xsl:text>, </xsl:text>
+				  </xsl:for-each>
+      				<xsl:apply-templates select="ead:physdesc[@altrender='part'][last()]/ead:extent"/>
+      			</dd>
+      		</xsl:if>
       	</xsl:if>
       	<xsl:if test="ead:physdesc/ead:dimensions">
       		<dt class="archdescLabel">
