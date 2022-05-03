@@ -69,10 +69,6 @@
 			<xsl:otherwise>https://library.princeton.edu/special-collections/</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
-	<!-- RH 2022 are these still used? -->
-	<!--<xsl:variable name="ark" select="/ead:ead/ead:eadheader/ead:eadid/@url"/>
-   <xsl:variable name="id" select="substring-after(/ead:ead/ead:eadheader/ead:eadid/@url, 'princeton.edu/')"/>
-  -->
 	<!-- RH 2022 update link -->
 	<xsl:variable name="VOYAGER_QUERY_BASE">
 		<xsl:value-of select="'https://catalog.princeton.edu/catalog'"/>
@@ -180,9 +176,6 @@
 			<xsl:if test="//ead:archdesc/ead:scopecontent">
 				<li>
 					<a href="{$xslt.base-uri}/index.html#scopecontent">
-						<!--<xsl:value-of
-                            select="//ead:archdesc/ead:descgrp[@id='dacs3']/ead:scopecontent/ead:head"
-                        />-->
 						<xsl:text>Description</xsl:text>
 					</a>
 				</li>
@@ -197,11 +190,6 @@
 					<a href="{$xslt.base-uri}/index.html#accessrestrict">Information for Users</a>
 				</li>
 			</xsl:if>
-			<!--<xsl:if test="//ead:archdesc/ead:controlaccess">
-            <li>
-               <a href="{$xslt.base-uri}/index.html#controlaccess">Subject Headings</a>
-            </li>
-         </xsl:if>-->
 			<!--RH 2022: remove type attribute -->
 			<xsl:if test="//ead:archdesc/ead:dsc">
 				<li>
@@ -239,15 +227,6 @@
 		</xsl:if>
 	</xsl:template>
 	<xsl:template match="ead:profiledesc"/>
-	<!--
-   <xsl:template match="ead:profiledesc">
-      <p class="copyright">
-         <xsl:text>&#169;</xsl:text>
-         <xsl:value-of select="replace(ead:creation/ead:date/@normal, '(\p{N}{4}).*', '$1', 'm')"/>
-         <!-\- <xsl:value-of select="year-from-date(current-date())"/>  -\->
-         <xsl:text> Princeton University Library</xsl:text>
-      </p>
-   </xsl:template>-->
 	<!-- ead:archdesc/* ======================================== -->
 	<xsl:template match="ead:archdesc">
 		<!-- RH 2022: Fix paths post-migration; no more dacs groupings for the notes -->
@@ -271,9 +250,7 @@
 			<h5>Processing Information</h5>
 			<xsl:apply-templates select="ead:processinfo"/>
 		</xsl:if>
-<xsl:call-template name="otherprocessinfo">
-	
-</xsl:call-template>
+		<xsl:call-template name="otherprocessinfo"/>
 		<xsl:apply-templates select="ead:prefercite"/>
 		<!--<xsl:apply-templates select="ead:controlaccess"/>-->
 		<xsl:apply-templates select="ead:dsc"/>
@@ -433,44 +410,7 @@
 			</dd>
 		</xsl:for-each>
 	</xsl:template>
-	<!-- RH 2022: ASpace has multiple physdescs; move into did template -->
-	<!-- RH: ead:physdesc without children in the high level did -->
-	<!--<xsl:template match="ead:physdesc[not(ancestor::ead:dsc)]">
-      <xsl:if test=".[not(ead:*)]">
-         <dt class="archdescLabel">
-            <xsl:text>Physical Description: </xsl:text>
-         </dt>
-         <dd class="archdescData">
-            <xsl:apply-templates/>
-         </dd>
-      </xsl:if>
-      <xsl:if test="ead:physfacet">
-         <dt class="archdescLabel">
-            <xsl:text>Physical Characteristics: </xsl:text>
-         </dt>
-         <dd class="archdescData">
-            <xsl:apply-templates/>
-         </dd>
-      </xsl:if>
-      <xsl:if test="ead:extent[not(@type)]">
-         <dt class="archdescLabel">
-            <xsl:text>Size: </xsl:text>
-         </dt>
-         <xsl:for-each select="ead:extent[not(@type)]">
-            <dd class="archdescData">
-               <xsl:apply-templates/>
-            </dd>
-         </xsl:for-each>
-      </xsl:if>
-      <xsl:if test="ead:dimensions">
-         <dt class="archdescLabel">
-            <xsl:text>Dimensions: </xsl:text>
-         </dt>
-         <dd class="archdescData">
-            <xsl:apply-templates/>
-         </dd>
-      </xsl:if>
-   </xsl:template>-->
+	
 	<!-- this could use some cleanup. JPS, 9/30/2008 -->
 	<xsl:template match="ead:unittitle[not(ancestor::ead:dsc) and not(ancestor::ead:item)]">
 		<!--        <xsl:choose>-->
@@ -514,130 +454,7 @@
 			<xsl:apply-templates/>
 		</dd>
 	</xsl:template>
-	<!-- RH 2022: we no longer have @type post-migration -->
-	<!--<xsl:template match="ead:physloc">
-      <xsl:choose>
-         <!-\- is this ever used? -\->
-         <xsl:when test="ancestor::*[matches(local-name(), '^c(0\d)?$')]">
-            <p>
-               <xsl:apply-templates/>
-            </p>
-         </xsl:when>
-         <xsl:otherwise>
-            <xsl:choose>
-               <xsl:when test="@type='text'">
-                  <dt class="archdescLabel">
-                     <xsl:text>Storage note: </xsl:text>
-                  </dt>
-                  <dd class="archdescData">
-                     <xsl:apply-templates/>
-                  </dd>
-               </xsl:when>
-               <xsl:otherwise>
-                  <xsl:choose>
-                     <xsl:when
-                        test="not(preceding-sibling::ead:physloc[@type='text'] | following-sibling::ead:physloc[@type='text']) 
-                  and @type='code' and matches(., '^mudd$')">
-                        <dt class="archdescLabel">
-                           <xsl:text>Storage note: </xsl:text>
-                        </dt>
-                        <dd class="archdescData">This collection is stored onsite at the Mudd Manuscript Library.</dd>
-                     </xsl:when>
-                     <xsl:otherwise>
-                        <xsl:choose>
-                           <xsl:when
-                              test="not(preceding-sibling::ead:physloc[@type='text'] | following-sibling::ead:physloc[@type='text']) 
-                              and @type='code' and (matches(., '^rcpph$') or matches(., '^rcppf$') or matches(., '^rcpxg$') or matches(., '^rcpxm$') 
-                              or matches(., '^rcpxr$') or matches(., '^rcppa$') or matches(., '^rcpxc$'))">
-                              <dt class="archdescLabel">
-                                 <xsl:text>Storage note: </xsl:text>
-                              </dt>
-                              <dd class="archdescData">This collection is stored offsite at the ReCAP facility.</dd>
-                           </xsl:when>
-                           <xsl:otherwise>
-                              <xsl:choose>
-                                 <xsl:when
-                                    test="not(preceding-sibling::ead:physloc[@type='text'] | following-sibling::ead:physloc[@type='text']) 
-                                    and @type='code' and (matches(., '^flm$') or matches(., '^flmp$') or matches(., '^wa$') or matches(., '^gax$') 
-                                    or matches(., '^mss$') or matches(., '^ex$') or matches(., '^flmm$')                                    
-                                    or matches(., '^ctsn$') or matches(., '^thx$'))">
-                                    <dt class="archdescLabel">
-                                       <xsl:text>Storage note: </xsl:text>
-                                    </dt>
-                                    <dd class="archdescData">This collection is stored onsite at Firestone Library.</dd>
-                                 </xsl:when>
-                                 <xsl:otherwise>
-                                    <xsl:choose>
-                                       <xsl:when
-                                          test="not(preceding-sibling::ead:physloc[@type='text'] | following-sibling::ead:physloc[@type='text']) 
-                                          and @type='code' and (matches(., '^hsvc$') or matches(., '^hsvg$') or matches(., '^hsvm$') or matches(., '^hsvr$'))">
-                                          <dt class="archdescLabel">
-                                             <xsl:text>Storage note: </xsl:text>
-                                          </dt>
-                                          <dd class="archdescData">This collection is stored in special vault facilities at Firestone Library.</dd>
-                                       </xsl:when>
-                                       <xsl:otherwise>
-                                          <xsl:choose>
-                                             <xsl:when
-                                                test="not(preceding-sibling::ead:physloc[@type='text'] | following-sibling::ead:physloc[@type='text']) 
-                                          and @type='code' and (matches(., '^anxb$'))">
-                                                <dt class="archdescLabel">
-                                                   <xsl:text>Storage note: </xsl:text>
-                                                </dt>
-                                                <dd class="archdescData">This collection is stored offsite at Annex B (Fine Hall).</dd>
-                                             </xsl:when>
-                                             <xsl:otherwise>
-                                                <xsl:choose>
-                                                   <xsl:when
-                                                      test="not(preceding-sibling::ead:physloc[@type='text'] | following-sibling::ead:physloc[@type='text']) 
-                                                and @type='code' and (matches(., '^st$'))">
-                                                      <dt class="archdescLabel">
-                                                         <xsl:text>Storage note: </xsl:text>
-                                                      </dt>
-                                                      <dd class="archdescData">This collection is stored onsite at the Engineering Library.</dd>
-                                                   </xsl:when>
-                                                   <xsl:otherwise>
-                                                      <xsl:choose>
-                                                         <xsl:when
-                                                            test="not(preceding-sibling::ead:physloc[@type='text'] | following-sibling::ead:physloc[@type='text']) 
-                                                      and @type='code' and (matches(., '^ppl$'))">
-                                                            <dt class="archdescLabel">
-                                                               <xsl:text>Storage note: </xsl:text>
-                                                            </dt>
-                                                            <dd class="archdescData">This collection is stored onsite at the Plasma Physics Library.</dd>
-                                                         </xsl:when>
-                                                         <xsl:otherwise>
-                                                            <xsl:choose>
-                                                               <xsl:when test="not(@type)">
-                                                                  <dt class="archdescLabel">
-                                                                     <xsl:text>Storage note: </xsl:text>
-                                                                  </dt>
-                                                                  <dd class="archdescData">
-                                                                     <xsl:apply-templates/>
-                                                                  </dd>
-                                                               </xsl:when>
-                                                            </xsl:choose>
-                                                         </xsl:otherwise>
-                                                      </xsl:choose>
-                                                   </xsl:otherwise>
-                                                </xsl:choose>
-
-                                             </xsl:otherwise>
-
-                                          </xsl:choose>
-                                       </xsl:otherwise>
-                                    </xsl:choose>
-                                 </xsl:otherwise>
-                              </xsl:choose>
-                           </xsl:otherwise>
-                        </xsl:choose>
-                     </xsl:otherwise>
-                  </xsl:choose>
-               </xsl:otherwise>
-            </xsl:choose>
-         </xsl:otherwise>
-      </xsl:choose>
-   </xsl:template>-->
+	
 	<!-- RH: insert "bulk" when @type='bulk' -->
 	<xsl:template match="ead:archdesc/ead:did/ead:unitdate">
 		<dd class="archdescData">
@@ -4918,12 +4735,9 @@
 	<xsl:template match="ead:relatedmaterial">
 		<h4 id="relatedmaterial">Related Materials</h4>
 		<xsl:apply-templates/>
-		<!--            <xsl:with-param name="id" select="'relatedmaterial'"/>
-        </xsl:apply-templates-->
 	</xsl:template>
 	<!-- descgrp[id="dacs7"]/* (processinfo) =============================== -->
 	<xsl:template match="ead:processinfo">
-		<!--            <xsl:with-param name="id" select="'processinfo'"/>-->
 		<xsl:apply-templates/>
 	</xsl:template>
 	<xsl:template name="otherprocessinfo">
@@ -4950,9 +4764,7 @@
 		<!-- NOTE: ead:prefercite gets its own h4 -->
 		<h4 id="prefercite">Preferred Citation</h4>
 		<xsl:apply-templates/>
-		<!--
-            <xsl:with-param name="id" select="'prefercite'"/>
-        </xsl:apply-templates>-->
+
 	</xsl:template>
 	<!-- controlaccess/* (processinfo) ====================================== -->
 	<!-- NOTE: this isn't very flexible. right now all ead:head and ead:p data 
@@ -4960,428 +4772,7 @@
         anywhere other than prior to the list of terms this template would need
         adjustment/enhancement
    -->
-	<xsl:template match="ead:controlaccess">
-		<xsl:choose>
-			<xsl:when test="ancestor::*[matches(local-name(), '^c(0\d)?$')]">
-				<!-- when we're in the dsc -->
-				<xsl:for-each select="child::*">
-					<p>
-						<xsl:if test="@role">
-							<xsl:value-of select="pul:strip-trailspace(@role)"/>
-							<xsl:text>: </xsl:text>
-						</xsl:if>
-						<xsl:apply-templates/>
-					</p>
-				</xsl:for-each>
-			</xsl:when>
-			<xsl:otherwise>
-				<h4 id="controlaccess">Subject Headings</h4>
-				<xsl:apply-templates select="ead:p"/>
-				<!--
-                    <xsl:with-param name="id" select="'controlaccess'"/>
-                </xsl:apply-templates>-->
-				<xsl:if
-					test="
-						ead:persname | ead:corpname | ead:famname | ead:name |
-						ead:title | ead:subject[@source != 'local'] | ead:geogname | ead:genreform | ead:occupation">
-					<ul class="normalIndent">
-						<xsl:for-each
-							select="
-								ead:persname | ead:corpname | ead:famname | ead:name |
-								ead:title | ead:subject[@source != 'local'] | ead:geogname |
-								ead:genreform | ead:occupation">
-							<xsl:variable name="subjectTopic"
-								select="replace(., '(\.| )$', '', 'm')"/>
-							<xsl:variable name="query">
-								<xsl:value-of select="$VOYAGER_QUERY_BASE"/>
-								<xsl:text>?utf8=true&amp;search_field=subject&amp;q=</xsl:text>
-								<xsl:value-of
-									select="replace(normalize-space($subjectTopic), ' ', '+', 'm')"/>
-								<!--<xsl:text>&amp;CNT=50</xsl:text>-->
-							</xsl:variable>
-							<li>
-								<a href="{$query}">
-									<xsl:apply-templates select="current()"/>
-								</a>
-							</li>
-						</xsl:for-each>
-					</ul>
-				</xsl:if>
-				<xsl:if test="exists(ead:subject[@source = 'local'])">
-					<p>Browse other finding aids related to the following terms:</p>
-					<ul class="normalIndent">
-						<xsl:for-each select="ead:subject[@source = 'local']">
-							<xsl:variable name="searchTerm">
-								<xsl:choose>
-									<xsl:when test="exist:match">
-										<xsl:value-of select="string-join(exist:match, ' ')"/>
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:apply-templates select="current()"/>
-									</xsl:otherwise>
-								</xsl:choose>
-							</xsl:variable>
-							<li>
-								<a href="{concat('search?zone1=sulocal&amp;text1=', $searchTerm)}">
-									<xsl:choose>
-										<xsl:when test="current()/(@authfilenumber | @id) = 't1'"
-											>Africa</xsl:when>
-										<xsl:otherwise>
-											<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't2'"
-												>American history</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't3'"
-												>American history/20th century</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't4'"
-												>American history/Civil War and
-												Reconstruction</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't5'"
-												>American history/Colonial</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't6'"
-												>American history/Early national</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't7'"
-												>American history/Gilded Age, Populism,
-												Progressivism</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't8'"
-												>American history/Revolution</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't9'"
-												>American literature</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't10'"
-												>American politics and government</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't11'"
-												>Ancient history</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't12'"
-												>Antiquities</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't13'"
-												>Architecture</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't14'"
-												>Art history</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't15'"
-												>Book history and arts</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't16'"
-												>British literature</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't17'"
-												>Cartography</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't18'"
-												>Children's books</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't19'"
-												>Classical literature</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't20'"
-												>Cold War</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't21'"
-												>Demography</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't22'"
-												>Diplomacy</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't23'"
-												>East Asian studies</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't24'"
-												>Economic history</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't25'"
-												>Education</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't26'"
-												>Environmental studies</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't27'"
-												>European history</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't28'"
-												>European literature</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't29'"
-												>Games and recreation</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't30'"
-												>Hellenic studies</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't31'"
-												>History of science</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't32'"
-												>International organizations</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't33'"
-												>Islamic manuscripts</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't34'"
-												>Journalism</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't35'"
-												>Latin American history</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't36'"
-												>Latin American literature</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't37'"
-												>Latin American studies</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't38'"
-												>Legal history</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't39'"
-												>Literature</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't40'"
-												>Medieval and Renaissance manuscripts</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't41'"
-												>Middle East</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't42'"
-												>Music</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't43'"
-												>Native American history</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't44'"
-												>New Jerseyana</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't45'"
-												>Philosophy</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't46'"
-												>Photography</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't47'"
-												>Political cartoons</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't48'"
-												>Princeton University</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't49'"
-												>Public policy/20th century</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't50'"
-												>Publishing history</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't51'"
-												>Religion</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't52'"
-												>Russia</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't53'"
-												>Theater/Film</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't54'"
-												>Travel</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't55'"
-												>Western Americana</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't56'"
-												>Women's studies</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't57'"
-												>World War I</xsl:when>
-												<xsl:otherwise>
-												<xsl:choose>
-												<xsl:when test="(@authfilenumber | @id) = 't58'"
-												>World War II</xsl:when>
-												<xsl:otherwise>
-												<xsl:apply-templates select="current()"/>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-												</xsl:choose>
-												</xsl:otherwise>
-											</xsl:choose>
-										</xsl:otherwise>
-									</xsl:choose>
-								</a>
-							</li>
-						</xsl:for-each>
-					</ul>
-				</xsl:if>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
+	
 	<!-- dsc/* (dsc) ======================================================== -->
 	<xsl:template name="process-dsc-unit-elements">
 		<!-- add choose: if both unitdate and unitttitle, test whether they're the same. If so, display unitdate. If not, add comma separator.
@@ -5440,13 +4831,7 @@ If only unitdate or only unittitle, display as is.  -->
 	</xsl:template>
 	<!-- RH 2022: remove type attribute -->
 	<xsl:template match="ead:dsc">
-		<!--        <xsl:choose>
-            <xsl:when test="child::ead:head">
-                <h4 id="dsc">
-                    <xsl:apply-templates select="ead:head"/>
-                </h4>
-            </xsl:when>
-            <xsl:otherwise>-->
+
 		<h4 id="dsc">Contents List</h4>
 		<ol class="contents">
 			<xsl:for-each select="(descendant::*)[matches(local-name(), '^c(0\d)?$')]">
@@ -5491,9 +4876,7 @@ If only unitdate or only unittitle, display as is.  -->
 									<xsl:when test="not(matches(@level, 'file|item|otherlevel'))">
 										<!-- RH: add otherlevel -->
 										<h5>
-											<!--                                            <xsl:if test="@id">
-                                                <xsl:attribute name="id" select="@id"/>
-                                            </xsl:if>-->
+
 											<xsl:attribute name="id" select="generate-id()"/>
 											<xsl:call-template name="process-dsc-unit-elements"/>
 										</h5>
@@ -5532,12 +4915,7 @@ If only unitdate or only unittitle, display as is.  -->
 								<xsl:apply-templates select="ead:relatedmaterial"/>
 								<xsl:apply-templates select="ead:bibliography"/>
 								<xsl:apply-templates select="ead:separatedmaterial"/>
-								<!-- Added originalsloc, RH: langmaterial, odd, phystech, otherfindaid, custodhist, acqinfo, appraisal, accruals, relatedmaterial,
-                                bibliography, separatedmaterial-->
-								<!-- any others? -->
-								<!--<p>
-                           <a href="{$xslt.base-uri}/index.html#dsc">Back to Top of Contents List</a>
-                        </p>-->
+
 							</td>
 							<xsl:if
 								test="(ead:did/ead:container | ead:did/ead:unitid[@type = 'itemnumber'])">
@@ -5563,9 +4941,7 @@ If only unitdate or only unittitle, display as is.  -->
 												select="//ead:dsc[@type = 'othertype']/ead:c[@id = $sub_container]/ead:did/ead:container"/>
 												<xsl:if test="position() ne last()">,</xsl:if>
 											</xsl:when>
-											<!--<xsl:when test=".[@type='album'] | .[@type='box'] | .[@type='carton'] | .[@type='case'] | .[@type='letterbook'] | .[@type='notebook'] | .[@type='oversize'] | .[@type='package'] | .[@type='portfolio'] | .[@type='scrapbook'] | .[@type='tube'] | .[@type='volume']">
-                                    <xsl:value-of select="./concat(normalize-space(upper-case(@type)), ' ', normalize-space(.))"/>
-                                 </xsl:when>-->
+
 											<xsl:otherwise>
 												<xsl:if
 												test=".[@type = 'album'] | .[@type = 'box'] | .[@type = 'carton'] | .[@type = 'case'] | .[@type = 'letterbook'] | .[@type = 'notebook'] | .[@type = 'oversize'] | .[@type = 'package'] | .[@type = 'portfolio'] | .[@type = 'scrapbook'] | .[@type = 'tube'] | .[@type = 'volume']">
@@ -5606,16 +4982,7 @@ If only unitdate or only unittitle, display as is.  -->
 											</xsl:otherwise>
 										</xsl:choose>
 									</xsl:for-each>
-									<!--  <xsl:for-each select="ead:did/ead:container">
-                              <xsl:value-of
-                                 select="concat(upper-case(substring(pul:strip-trailspace(@type),1,1)),
-                                            substring(pul:strip-trailspace(@type), 2))"/>
-                              <xsl:text> </xsl:text>
-                              <xsl:value-of select="current()"/>
-                              <xsl:if test="position() != last()">
-                                 <xsl:text>, </xsl:text>
-                              </xsl:if>
-                           </xsl:for-each>-->
+
 								</td>
 							</xsl:if>
 						</tr>
@@ -5637,8 +5004,7 @@ If only unitdate or only unittitle, display as is.  -->
 			</xsl:attribute>
 		</h4>
 		<xsl:apply-templates select="ead:p"/>
-		<!--            <xsl:with-param name="id" select="concat('index', $position)"/>
-        </xsl:apply-templates>-->
+
 		<ul>
 			<xsl:apply-templates select="ead:indexentry"/>
 		</ul>
@@ -5686,8 +5052,7 @@ If only unitdate or only unittitle, display as is.  -->
 			</xsl:attribute>
 		</h4>
 		<xsl:apply-templates/>
-		<!--            <xsl:with-param name="id" select="concat('odd', $position cast as xs:string)"/>
-        </xsl:apply-templates>-->
+
 	</xsl:template>
 	<xsl:template match="ead:dao | ead:did/ead:dao">
 		<a>
@@ -5782,66 +5147,18 @@ If only unitdate or only unittitle, display as is.  -->
 			<xsl:apply-templates/>
 		</xsl:if>
 	</xsl:template>
-	<!--<xsl:template match="ead:prefercite[not(ancestor::ead:dsc)]">
-        <h5>
-            <xsl:text>Preferred Citation</xsl:text>
-        </h5>   
-        <xsl:apply-templates/>
-    </xsl:template>-->
+
 	<xsl:template match="ead:separatedmaterial[not(ancestor::ead:dsc)]">
 		<h5>
 			<xsl:text>Separated Material</xsl:text>
 		</h5>
 		<xsl:apply-templates/>
 	</xsl:template>
-	<!--    <xsl:template match="ead:head[not(ancestor::ead:dsc)]">
-        <xsl:param name="id"/>
-        <xsl:choose>
-            <xsl:when
-                test="../../../ead:archdesc|parent::ead:bioghist|parent::ead:descgrp|parent::ead:scopecontent|
-        parent::ead:arrangement|parent::ead:prefercite|ead:odd|parent::ead:controlaccess">
-                <h4>
-                    <xsl:if test="$id ne ''">
-                        <xsl:attribute name="id" select="$id"/>
-                    </xsl:if>
-                    <xsl:apply-templates/>
-                </h4>
-            </xsl:when>
-            <xsl:when
-                test="parent::ead:accessrestrict|parent::ead:userestrict|
-        parent::ead:phystech|parent::ead:otherfindaid|parent::ead:custodhist|
-        parent::ead:acqinfo|parent::ead:appraisal|parent::ead:accruals|parent::ead:originalsloc|parent::ead:altformavail|
-        parent::ead:relatedmaterial|parent::ead:bibliography|parent::ead:prefercite|parent::ead:processinfo|parent::ead:separatedmaterial">
-                <h5>
-                    <xsl:apply-templates/>
-                </h5>
-            </xsl:when>
-            <xsl:otherwise>
-                <strong>
-                    <xsl:apply-templates/>
-                    <xsl:text> </xsl:text>
-                </strong>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>-->
-	<!--    <xsl:template match="ead:head[ancestor::*[matches(local-name(), '^c(0\d)?$')]]">
-        <p class="cHead">
-            <xsl:apply-templates/>
-        </p>
-    </xsl:template>-->
+	
 	<!-- RH: don't link dsc-level origination -->
 	<xsl:template match="ead:dsc//ead:origination">
 		<p>
-			<!--<xsl:choose>
-                     if not check if our parent has a label -->
-			<!--<xsl:when test="../@label">-->
-			<!-- RH: make first letter of label uppercase -->
-			<!--<xsl:value-of
-                            select="pul:strip-trailspace(concat(translate(substring(../@label, 1, 1),  'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'), substring(../@label, 2)))"
-                        />
-                    </xsl:when>
-                    <xsl:otherwise>Creator:</xsl:otherwise>
-                </xsl:choose>-->
+			
 			<xsl:text>Creator: </xsl:text>
 			<xsl:apply-templates
 				select="(ead:list | ead:persname | ead:corpname | ead:famname)[position() = 1]"> </xsl:apply-templates>
@@ -8144,21 +7461,7 @@ If only unitdate or only unittitle, display as is.  -->
 		</ol>
 	</xsl:template>
 	<xsl:template match="ead:list[@type = 'simple' or not(@type)]">
-		<!-- take care of the head first -->
-		<!--        <xsl:if test="ead:head">
-            <xsl:choose>
-                <xsl:when test="ancestor::ead:p">
-                    <xsl:text> </xsl:text>
-                    <xsl:apply-templates select="ead:head"/>
-                    <xsl:text> </xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                    <h5>
-                        <xsl:apply-templates select="ead:head"/>
-                    </h5>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:if>-->
+		
 		<!-- then the list items -->
 		<xsl:choose>
 			<xsl:when test="ancestor::ead:p">
