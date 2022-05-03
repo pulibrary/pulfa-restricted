@@ -293,7 +293,41 @@
          <xsl:apply-templates select="ead:unitdate[@type='bulk']"/>
          <xsl:apply-templates select="ead:unitdate[not(@type)]"/>
          <xsl:apply-templates select="ead:abstract"/>
-         <xsl:apply-templates select="ead:physdesc"/>
+      	<xsl:if test="ead:physdesc[not(ead:*)]">
+      		<dt class="archdescLabel">
+      			<xsl:text>Physical Description: </xsl:text>
+      		</dt>
+      		<dd class="archdescData">
+      			<xsl:apply-templates/>
+      		</dd>
+      	</xsl:if>
+      	<xsl:if test="ead:physdesc/ead:physfacet">
+      		<dt class="archdescLabel">
+      			<xsl:text>Physical Characteristics: </xsl:text>
+      		</dt>
+      		<dd class="archdescData">
+      			<xsl:apply-templates/>
+      		</dd>
+      	</xsl:if>
+      	<xsl:if test="ead:physdesc/ead:extent">
+      		<dt class="archdescLabel">
+      			<xsl:text>Size: </xsl:text>
+      		</dt>
+      		<xsl:for-each select="ead:physdesc/ead:extent">
+      			<dd class="archdescData">
+      				<xsl:apply-templates/>
+      			</dd>
+      		</xsl:for-each>
+      	</xsl:if>
+      	<xsl:if test="ead:physdesc/ead:dimensions">
+      		<dt class="archdescLabel">
+      			<xsl:text>Dimensions: </xsl:text>
+      		</dt>
+      		<dd class="archdescData">
+      			<xsl:apply-templates/>
+      		</dd>
+      	</xsl:if>
+         <!--<xsl:apply-templates select="ead:physdesc"/>-->
          <xsl:apply-templates select="ead:unitid"/>
          <xsl:apply-templates select="ead:repository"/>
          <xsl:apply-templates select="ead:langmaterial"/>
@@ -323,9 +357,9 @@
       </xsl:for-each>
    </xsl:template>
 
-
+<!-- RH 2022: ASpace has multiple physdescs; move into did template -->
    <!-- RH: ead:physdesc without children in the high level did -->
-   <xsl:template match="ead:physdesc[not(ancestor::ead:dsc)]">
+   <!--<xsl:template match="ead:physdesc[not(ancestor::ead:dsc)]">
       <xsl:if test=".[not(ead:*)]">
          <dt class="archdescLabel">
             <xsl:text>Physical Description: </xsl:text>
@@ -360,7 +394,7 @@
             <xsl:apply-templates/>
          </dd>
       </xsl:if>
-   </xsl:template>
+   </xsl:template>-->
 
    <!-- this could use some cleanup. JPS, 9/30/2008 -->
    <xsl:template match="ead:unittitle[not(ancestor::ead:dsc) and not(ancestor::ead:item)]">
