@@ -9,18 +9,14 @@
 	xmlns:mets="http://www.loc.gov/METS/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 	xmlns:ov="http://open.vocab.org/terms/" xmlns:vc="http://www.w3.org/2006/vcard/ns#">
 	<xsl:output method="html" indent="yes" encoding="UTF-8" doctype-system="about:legacy-compat"/>
-	<!--<xsl:param name="xslt.base-uri" as="xs:string" select="'file:///C:/Users/Public/Documents/morrison'"/>-->
-	<xsl:param name="xslt.base-uri" as="xs:string"
-		select="'/Users/heberleinr/Documents/pulfa-restricted'"/>
-	<xsl:param name="xslt.record-id" as="xs:string" select="'C1491'"/>
+	
 	<xsl:include href="lib.xsl"/>
 	<xsl:include href="includes.xsl"/>
 	<!-- globals ============================================================ -->
 	<xsl:template match="ead:head"/>
 	<xsl:template match="ead:revisiondesc"/>
 	<xsl:variable name="aeon-url" select="'https://libweb10.princeton.edu/aeon/Aeon.dll'"/>
-	<xsl:variable name="collections-base-uri" select="concat($xslt.base-uri, '/collections')"
-		as="xs:string"/>
+	
 	<!-- RH 2022: aspace path is archdesc/did/repository/corpname; no attributes; this is a controlled value so no need for string-matching  -->
 	<xsl:variable name="repo">
 		<xsl:value-of select="//ead:archdesc/ead:did/ead:repository/ead:corpname"/>
@@ -88,23 +84,19 @@
 	<xsl:template match="/">
 		<html xmlns="http://www.w3.org/1999/xhtml">
 			<head>
-				<base href="{$xslt.base-uri}/"/>
+				
 				<title>
 					<xsl:value-of select="$repo"/>
 					<xsl:value-of select="//ead:titleproper[1]"/>
 				</title>
-				<xsl:call-template name="standard-head">
-					<xsl:with-param name="base-uri" select="$xslt.base-uri"/>
-				</xsl:call-template>
+				<xsl:call-template name="standard-head"/>
 				<xsl:call-template name="standard-css"/>
 				<link rel="stylesheet" type="text/css" href="css/classic.css" media="all"/>
-				<link rel="canonical" href="{$xslt.base-uri}/{$xslt.record-id}.html"/>
+				
 			</head>
 			<body>
 				<xsl:call-template name="alt-nav">
 					<xsl:with-param name="focus" select="'collections'"/>
-					<xsl:with-param name="base-uri" select="$xslt.base-uri"/>
-					<xsl:with-param name="record-id" select="$xslt.record-id"/>
 				</xsl:call-template>
 				<div class="container">
 					<div class="content">
@@ -141,7 +133,7 @@
          </li>-->
 			<xsl:if test="//ead:archdesc/ead:did">
 				<li>
-					<a href="{$xslt.base-uri}/index.html#collectionDid">
+					<a href="#collectionDid">
 						<xsl:text>Summary Information</xsl:text>
 					</a>
 				</li>
@@ -149,7 +141,7 @@
 			<!-- RH 2022: This will never be true, adding namespace prefix -->
 			<xsl:if test="//ead:archdesc/ead:bioghist[ead:p]">
 				<li>
-					<a href="{$xslt.base-uri}/index.html#bioghist">
+					<a href="#bioghist">
 						<xsl:choose>
 							<!-- RH 2022: We need to distinguish these by nested element, @encodinganalog was lost during the migration-->
 							<!-- RH 2022: relative path doesn't work here, changing to absolute -->
@@ -175,25 +167,25 @@
 			<!-- RH 2022: fix paths to notes -->
 			<xsl:if test="//ead:archdesc/ead:scopecontent">
 				<li>
-					<a href="{$xslt.base-uri}/index.html#scopecontent">
+					<a href="#scopecontent">
 						<xsl:text>Description</xsl:text>
 					</a>
 				</li>
 			</xsl:if>
 			<xsl:if test="//ead:archdesc/ead:arrangement">
 				<li>
-					<a href="{$xslt.base-uri}/index.html#arrangement">Arrangement</a>
+					<a href="#arrangement">Arrangement</a>
 				</li>
 			</xsl:if>
 			<xsl:if test="//ead:archdesc/ead:accessrestrict">
 				<li>
-					<a href="{$xslt.base-uri}/index.html#accessrestrict">Information for Users</a>
+					<a href="#accessrestrict">Information for Users</a>
 				</li>
 			</xsl:if>
 			<!--RH 2022: remove type attribute -->
 			<xsl:if test="//ead:archdesc/ead:dsc">
 				<li>
-					<a href="{$xslt.base-uri}/index.html#dsc">Contents List</a>
+					<a href="#dsc">Contents List</a>
 				</li>
 			</xsl:if>
 			<xsl:for-each
@@ -203,7 +195,7 @@
 				<xsl:variable name="sansUnitdate"
 					select="replace(ead:did/ead:unittitle, '(.*),\s*\d\d\d\d.*', '$1', 'm')"/>
 				<li>
-					<a href="{$xslt.base-uri}/index.html#{@id}">
+					<a href="#{@id}">
 						<xsl:value-of select="$sansUnitdate"/>
 					</a>
 				</li>
@@ -4708,9 +4700,7 @@
 							<li>
 								<a>
 									<xsl:attribute name="href">
-										<xsl:value-of
-											select="concat($xslt.base-uri, '/collections/', $xslt.record-id, '#', generate-id(.))"
-										/>
+										<xsl:value-of select="concat('#', generate-id(.))"/>
 									</xsl:attribute>
 									<xsl:if test="self::ead:*/@level = 'subseries'">
 										<xsl:attribute name="style">margin-left:2em;</xsl:attribute>
