@@ -4844,7 +4844,8 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</h4>
-			<xsl:apply-templates select="*[not(self::ead:dao)]"/>
+<xsl:apply-templates select="ead:note/text()"></xsl:apply-templates>
+			<xsl:apply-templates select="*[not(self::ead:dao or self::ead:note)]"/>
 		</xsl:if>
 	</xsl:template>
 	<xsl:template match="ead:bioghist[not(parent::ead:archdesc)]">
