@@ -5759,12 +5759,7 @@ If only unitdate or only unittitle, display as is.  -->
 		</h5>
 		<xsl:apply-templates/>
 	</xsl:template>
-	<xsl:template match="ead:relatedmaterial[not(ancestor::ead:dsc)]">
-		<h5>
-			<xsl:text>Related Materials</xsl:text>
-		</h5>
-		<xsl:apply-templates/>
-	</xsl:template>
+	
 	<xsl:template match="ead:bibliography[not(ancestor::ead:dsc)]">
 		<xsl:if test="../@id = 'dacs6'">
 			<h5>
