@@ -256,18 +256,21 @@
 		<xsl:apply-templates select="ead:bioghist"/>
 		<xsl:apply-templates select="ead:scopecontent"/>
 		<xsl:apply-templates select="ead:arrangement"/>
-<!-- RH 2022 handle headers for former dacs groups here -->
+		<!-- RH 2022 handle headers for former dacs groups here -->
 		<xsl:if test="ead:accessrestrict | ead:userestrict | ead:phystech">
 			<h4 id="accessrestrict">Access and Use</h4>
 			<xsl:apply-templates select="ead:accessrestrict | ead:userestrict | ead:phystech"/>
 		</xsl:if>
 		<xsl:if test="ead:acqinfo | ead:appraisal | ead:accruals">
-	<h4 id="acqinfo">Acquisition and Appraisal</h4>
+			<h4 id="acqinfo">Acquisition and Appraisal</h4>
 			<xsl:apply-templates select="ead:acqinfo | ead:appraisal | ead:accruals"/>
-</xsl:if>
-		
+		</xsl:if>
 		<xsl:apply-templates select="ead:relatedmaterial"/>
-		<xsl:apply-templates select="ead:prefercite | ead:processinfo"/>
+		<xsl:if test="ead:processinfo | ead:bibliography">
+			<h4 id="processinfo">Processing and Other Information</h4>
+			<xsl:apply-templates select="ead:processinfo | ead:bibliography"/>
+		</xsl:if>
+		<xsl:apply-templates select="ead:prefercite"/>
 		<!--<xsl:apply-templates select="ead:controlaccess"/>-->
 		<xsl:apply-templates select="ead:dsc"/>
 		<xsl:apply-templates select="ead:index"/>
@@ -4915,11 +4918,9 @@
         </xsl:apply-templates-->
 	</xsl:template>
 	<!-- descgrp[id="dacs7"]/* (processinfo) =============================== -->
-	<xsl:template match="ead:prefercite | ead:processinfo | ead:bibliography">
-		<h4 id="processinfo">Processing and Other Information</h4>
-		<xsl:apply-templates select="ead:prefercite | ead:processinfo | ead:bibliography"/>
-		<!--            <xsl:with-param name="id" select="'processinfo'"/>
-        </xsl:apply-templates>-->
+	<xsl:template match="ead:processinfo | ead:bibliography">
+		<!--            <xsl:with-param name="id" select="'processinfo'"/>-->
+        <xsl:apply-templates/>
 		<xsl:if test="//ead:eadheader/ead:profiledesc/ead:descrules">
 			<h5>Descriptive Rules Used</h5>
 			<p>
@@ -4938,9 +4939,12 @@
 				<xsl:apply-templates select="//ead:eadheader/ead:profiledesc/ead:langusage"/>
 			</p>
 		</xsl:if>
-		<!-- NOTE: ead:prefercite gets its own h4 -->
+	</xsl:template>
+<xsl:template match="ead:prefercite">
+
+	<!-- NOTE: ead:prefercite gets its own h4 -->
 		<h4 id="prefercite">Preferred Citation</h4>
-		<xsl:apply-templates select="ead:prefercite"/>
+		<xsl:apply-templates/>
 		<!--
             <xsl:with-param name="id" select="'prefercite'"/>
         </xsl:apply-templates>-->
@@ -5759,7 +5763,6 @@ If only unitdate or only unittitle, display as is.  -->
 		</h5>
 		<xsl:apply-templates/>
 	</xsl:template>
-	
 	<xsl:template match="ead:bibliography[not(ancestor::ead:dsc)]">
 		<xsl:if test="../@id = 'dacs6'">
 			<h5>
