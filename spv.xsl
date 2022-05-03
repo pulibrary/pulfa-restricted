@@ -271,6 +271,9 @@
 			<h5>Processing Information</h5>
 			<xsl:apply-templates select="ead:processinfo"/>
 		</xsl:if>
+<xsl:call-template name="otherprocessinfo">
+	
+</xsl:call-template>
 		<xsl:apply-templates select="ead:prefercite"/>
 		<!--<xsl:apply-templates select="ead:controlaccess"/>-->
 		<xsl:apply-templates select="ead:dsc"/>
@@ -4921,12 +4924,30 @@
 	<!-- descgrp[id="dacs7"]/* (processinfo) =============================== -->
 	<xsl:template match="ead:processinfo">
 		<!--            <xsl:with-param name="id" select="'processinfo'"/>-->
-<xsl:apply-templates/>
-		
+		<xsl:apply-templates/>
 	</xsl:template>
-<xsl:template match="ead:prefercite">
-
-	<!-- NOTE: ead:prefercite gets its own h4 -->
+	<xsl:template name="otherprocessinfo">
+		<xsl:if test="//ead:eadheader/ead:profiledesc/ead:descrules">
+			<h5>Descriptive Rules Used</h5>
+			<p>
+				<xsl:apply-templates select="//ead:eadheader/ead:profiledesc/ead:descrules"/>
+			</p>
+		</xsl:if>
+		<xsl:if test="//ead:eadheader/ead:profiledesc/ead:creation">
+			<h5>Encoding</h5>
+			<p>
+				<xsl:apply-templates select="//ead:eadheader/ead:profiledesc/ead:creation"/>
+			</p>
+		</xsl:if>
+		<xsl:if test="//ead:eadheader/ead:profiledesc/ead:langusage">
+			<h5>Language(s) of this Finding Aid</h5>
+			<p>
+				<xsl:apply-templates select="//ead:eadheader/ead:profiledesc/ead:langusage"/>
+			</p>
+		</xsl:if>
+	</xsl:template>
+	<xsl:template match="ead:prefercite">
+		<!-- NOTE: ead:prefercite gets its own h4 -->
 		<h4 id="prefercite">Preferred Citation</h4>
 		<xsl:apply-templates/>
 		<!--
@@ -5773,7 +5794,6 @@ If only unitdate or only unittitle, display as is.  -->
 		</h5>
 		<xsl:apply-templates/>
 	</xsl:template>
-	
 	<!--    <xsl:template match="ead:head[not(ancestor::ead:dsc)]">
         <xsl:param name="id"/>
         <xsl:choose>
