@@ -266,9 +266,10 @@
 			<xsl:apply-templates select="ead:acqinfo | ead:appraisal | ead:accruals"/>
 		</xsl:if>
 		<xsl:apply-templates select="ead:relatedmaterial"/>
-		<xsl:if test="ead:processinfo | ead:bibliography">
+		<xsl:if test="ead:processinfo">
 			<h4 id="processinfo">Processing and Other Information</h4>
-			<xsl:apply-templates select="ead:processinfo | ead:bibliography"/>
+			<h5>Processing Information</h5>
+			<xsl:apply-templates select="ead:processinfo"/>
 		</xsl:if>
 		<xsl:apply-templates select="ead:prefercite"/>
 		<!--<xsl:apply-templates select="ead:controlaccess"/>-->
@@ -4918,27 +4919,10 @@
         </xsl:apply-templates-->
 	</xsl:template>
 	<!-- descgrp[id="dacs7"]/* (processinfo) =============================== -->
-	<xsl:template match="ead:processinfo | ead:bibliography">
+	<xsl:template match="ead:processinfo">
 		<!--            <xsl:with-param name="id" select="'processinfo'"/>-->
-        <xsl:apply-templates/>
-		<xsl:if test="//ead:eadheader/ead:profiledesc/ead:descrules">
-			<h5>Descriptive Rules Used</h5>
-			<p>
-				<xsl:apply-templates select="//ead:eadheader/ead:profiledesc/ead:descrules"/>
-			</p>
-		</xsl:if>
-		<xsl:if test="//ead:eadheader/ead:profiledesc/ead:creation">
-			<h5>Encoding</h5>
-			<p>
-				<xsl:apply-templates select="//ead:eadheader/ead:profiledesc/ead:creation"/>
-			</p>
-		</xsl:if>
-		<xsl:if test="//ead:eadheader/ead:profiledesc/ead:langusage">
-			<h5>Language(s) of this Finding Aid</h5>
-			<p>
-				<xsl:apply-templates select="//ead:eadheader/ead:profiledesc/ead:langusage"/>
-			</p>
-		</xsl:if>
+<xsl:apply-templates/>
+		
 	</xsl:template>
 <xsl:template match="ead:prefercite">
 
@@ -5789,20 +5773,7 @@ If only unitdate or only unittitle, display as is.  -->
 		</h5>
 		<xsl:apply-templates/>
 	</xsl:template>
-	<xsl:template match="ead:processinfo[not(ancestor::ead:dsc)]">
-		<xsl:if test="@id = 'conservation'">
-			<h5>
-				<xsl:text>Conservation</xsl:text>
-			</h5>
-			<xsl:apply-templates/>
-		</xsl:if>
-		<xsl:if test="@id = 'processing'">
-			<h5>
-				<xsl:text>Processing Information</xsl:text>
-			</h5>
-			<xsl:apply-templates/>
-		</xsl:if>
-	</xsl:template>
+	
 	<!--    <xsl:template match="ead:head[not(ancestor::ead:dsc)]">
         <xsl:param name="id"/>
         <xsl:choose>
