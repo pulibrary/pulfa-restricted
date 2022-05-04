@@ -7,3 +7,9 @@ The following parameters are required:
 
 1. xslt.base-uri
 2. xslt.record-id
+
+To test html output:
+
+1. copy contents of `assets` into `test`
+2. download EAD into `test`
+3. apply svp.xsl to EAD
