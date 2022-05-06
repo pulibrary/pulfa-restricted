@@ -5047,7 +5047,9 @@ If only unitdate or only unittitle, display as is.  -->
 	<xsl:template match="ead:dao | ead:did/ead:dao">
 		<a>
 			<xsl:attribute name="href">
-				<xsl:value-of select="@xlink:href"/>
+<!-- RH 2022: This needs to reference local pdf's in format "pdf/" + cid  (last part only)+ ".pdf"-->
+			<!--<xsl:value-of select="@xlink:href"/>-->
+				<xsl:value-of select="concat('pdf/', replace(ancestor::ead:c[1]/@id, '^.+_', ''), '.pdf')"/>
 			</xsl:attribute>
 			<xsl:attribute name="class">
 				<xsl:text>btn small</xsl:text>
